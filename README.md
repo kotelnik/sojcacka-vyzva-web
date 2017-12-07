@@ -72,7 +72,7 @@ Response (example):
 ### Vyhledávání výzev
 ```
 GET /vyzvy/api.php?path=/search
-  ?executerId={executerId}
+  &executerId={executerId}
   &creatorId={creatorId}
   &score={score}
   &difficultyId={difficultyId}
