@@ -34,7 +34,7 @@ Response (example):
         "score": "500",
         "durationSec": 3600,
         "difficultyId": 1,
-        "timeToFinishSec": 2195
+        "dueTime": "2017-12-08 21:58:09"
     }
 }
 ```
@@ -100,7 +100,7 @@ Response:
         "score": "500",
         "durationSec": 3600,
         "difficultyId": 1,
-        "timeToFinishSec": 2195
+        "dueTime": "2017-12-08 21:58:09"
     },
     {
         "id": 1,
@@ -115,7 +115,7 @@ Response:
         "score": "500",
         "durationSec": 3600,
         "difficultyId": 1,
-        "timeToFinishSec": 2195
+        "dueTime": "2017-12-08 21:58:09"
     }
 ]
 ```
