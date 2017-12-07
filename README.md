@@ -28,6 +28,8 @@ Response (example):
 }
 ```
 
+* currentChallenge, firstName, lastName mohou být null
+
 #### All Users
 
 GET /challenge/user/list
@@ -51,6 +53,8 @@ Response (example):
     }
 ]
 ```
+
+* firstName, lastName mohou být null
 
 ### Seznam výzev
 
