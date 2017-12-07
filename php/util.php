@@ -43,9 +43,8 @@ class ApiHelper {
             date_default_timezone_set("Europe/Prague");
             $started = strtotime($db_row['started']);
             $duration = (int) $copy['durationSec'];
-            $nowTime = time();
-            $timeToFinish = $started + $duration - $nowTime;
-            $copy['timeToFinishSec'] = $timeToFinish;
+            $dueTime = date("Y-m-d H:i:s", ($started + $duration));
+            $copy['dueTime'] = $dueTime;
         }
         return $copy;
     }
