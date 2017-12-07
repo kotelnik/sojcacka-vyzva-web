@@ -4,7 +4,7 @@
 header('X-Frame-Options: DENY');
 header('Strict-Transport-Security: max-age=10886400; includeSubDomains; preload');
 
-$KNOWN_API_PATHS = ['currentUser', 'user/list', 'search', 'searchByCreator'];
+$KNOWN_API_PATHS = ['/currentUser', '/user/list', '/search', '/searchByCreator'];
 
 if (!isset($_GET['path'])) {
     http_response_code(400);
