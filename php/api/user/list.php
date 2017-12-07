@@ -9,12 +9,7 @@ $query = mysqli_query($connection, "SELECT * FROM Person");
 
 $result = array();
 while ($row = mysqli_fetch_array($query)) {
-    $item = array();
-    $item['id'] = $row['id'];
-    $item['firstName'] = $row['firstName'];
-    $item['lastName'] = $row['lastName'];
-    $item['nickName'] = $row['nickName'];
-    $item['scoreChallenges'] = $row['scoreChallenges'];
+    $item = ApiHelper::copyUser($row);
     array_push($result, $item);
 }
 

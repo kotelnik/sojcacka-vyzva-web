@@ -13,7 +13,7 @@ API související s tabulkou Person (tedy uživatelem).
 
 GET /challenge/currentUser
 
-TEMPORARY: GET /vyzvy/api.php?path=/currentUser
+(CALL LIKE THIS: GET /vyzvy/api.php?path=/currentUser)
 
 Response (example):
 ```
@@ -24,8 +24,19 @@ Response (example):
     "nickName": "Jelcin",
     "scoreChallenges": 4050,
     "currentChallenge": {
+        "id": 2,
+        "creatorId": 2,
+        "executerId": 1,
         "title": "Pošli dopis",
-        "timeToFinishSec": 3600
+        "description": "popis",
+        "created": "2017-12-07 21:58:09",
+        "started": "2017-12-07 21:58:09",
+        "finished": null,
+        "statusId": 2,
+        "score": "500",
+        "durationSec": 3600,
+        "difficultyId": 1,
+        "timeToFinishSec": 2195
     }
 }
 ```
@@ -60,31 +71,60 @@ Response (example):
 
 ### Seznam výzev
 
-### Vyhledávání výzev dle vykonavatele (případně bez něj)
+### Vyhledávání výzev
 ```
 GET /challenge/search
   ?executerId={executerId}
-  &difficultyId={difficultyId}
+  &creatorId={creatorId}
   &score={score}
-  &duration={duration}
-  &orderBy={difficultyId|score}
+  &difficultyId={difficultyId}
+  &durationSec={durationSec}
+  &orderBy={executerId|difficultyId|score|durationSec|creatorId|created|started|finished|id}
   &ordering={asc|desc}
   &scoreGreater=true
-  &difficultyGreater=true
-  &durationGreater=true
+  &difficultyIdGreater=true
+  &durationSecGreater=true
+```
+
+Response:
+```
+[
+    {
+        "id": 2,
+        "creatorId": 2,
+        "executerId": 1,
+        "title": "Pošli dopis",
+        "description": "popis",
+        "created": "2017-12-07 21:58:09",
+        "started": "2017-12-07 21:58:09",
+        "finished": null,
+        "statusId": 2,
+        "score": "500",
+        "durationSec": 3600,
+        "difficultyId": 1,
+        "timeToFinishSec": 2195
+    },
+    {
+        "id": 1,
+        "creatorId": 1,
+        "executerId": 2,
+        "title": "Pošli dopis2",
+        "description": "popis2",
+        "created": "2017-12-07 21:58:09",
+        "started": "2017-12-07 21:58:09",
+        "finished": null,
+        "statusId": 2,
+        "score": "500",
+        "durationSec": 3600,
+        "difficultyId": 1,
+        "timeToFinishSec": 2195
+    }
+]
 ```
 
 * všechny parametry jsou nepovinné
-* executerId - pokud není zadán, vrátí všechny úkoly, kt. zrovna nikdo nevykonává
+* executerId - pokud je zadáno "null", vrátí všechny úkoly, kt. zrovna nikdo nevykonává
+* creatorId - pokud je zadáno "null", z principu vrátí prázdný JSON array
 * scoreGreater - true znamená, že se hledá jen zadané a vyšší score (false naopak)
-* difficultyGreater - true znamená, že se hledá jen zadaná a vyšší obtížnost (false naopak)
-* difficultyGreater - true znamená, že se hledá jen zadaná a vyšší doba trvání (false naopak)
-
-### Vyhledávání výzev dle zadavatele
-
-GET /challenge/searchByCreator?creatorId={creatorId}
-
-* parametr creatorId je povinný
-* seznam je seřazený dle data created od nejnovějšího po nejstarší
-* *vrací json s výzvami, kt. vytvořil Person se zadaným id*
-
+* difficultyIdGreater - true znamená, že se hledá jen zadaná a vyšší obtížnost (false naopak)
+* durationGreater - true znamená, že se hledá jen zadaná a vyšší doba trvání (false naopak)
