@@ -13,17 +13,19 @@ API související s tabulkou Person (tedy uživatelem).
 
 GET /challenge/currentUser
 
+TEMPORARY: GET /vyzvy/api.php?path=/currentUser
+
 Response (example):
 ```
 {
-    id: 123,
-    firstName: "Jára",
-    lastName: "Cimrman",
-    nickName: "Jelcin",
-    scoreChallenges: 4050,
-    currentChallenge: {
-        title: "Pošli dopis",
-        timeToFinishSec: 3600
+    "id": 123,
+    "firstName": "Jára",
+    "lastName": "Cimrman",
+    "nickName": "Jelcin",
+    "scoreChallenges": 4050,
+    "currentChallenge": {
+        "title": "Pošli dopis",
+        "timeToFinishSec": 3600
     }
 }
 ```
@@ -38,18 +40,18 @@ Response (example):
 ```
 [
     {
-        id: 123,
-        firstName: "Jára",
-        lastName: "Cimrman",
-        nickName: "Jelcin",
-        scoreChallenges: 4050
+        "id": 123,
+        "firstName": "Jára",
+        "lastName": "Cimrman",
+        "nickName": "Jelcin",
+        "scoreChallenges": 4050
     },
     {
-        id: 123,
-        firstName: "",
-        lastName: "",
-        nickName: "Sojka",
-        scoreChallenges: 340
+        "id": 124,
+        "firstName": null,
+        "lastName": null,
+        "nickName": "Sojka",
+        "scoreChallenges": 340
     }
 ]
 ```

@@ -1,3 +1,8 @@
+DROP TABLE IF EXISTS Challenge;
+DROP TABLE IF EXISTS Person;
+DROP TABLE IF EXISTS ChallengeStatus;
+DROP TABLE IF EXISTS ChallengeDifficulty;
+
 CREATE TABLE Person (
     id INT NOT NULL AUTO_INCREMENT,
     firstName VARCHAR(50),
@@ -20,7 +25,7 @@ CREATE TABLE Challenge (
     finished DATETIME,
     statusId INT NOT NULL,
     score DOUBLE NOT NULL,
-    duration BIGINT NOT NULL,
+    durationSec BIGINT NOT NULL,
     difficultyId INT NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

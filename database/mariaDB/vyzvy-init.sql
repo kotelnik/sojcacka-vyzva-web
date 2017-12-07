@@ -6,3 +6,6 @@ INSERT INTO ChallengeDifficulty (id, name) VALUES (1, 'easy');
 INSERT INTO ChallengeDifficulty (id, name) VALUES (2, 'moderate');
 INSERT INTO ChallengeDifficulty (id, name) VALUES (3, 'hard');
 INSERT INTO ChallengeDifficulty (id, name) VALUES (4, 'die_hard');
+
+INSERT INTO Person (nickName, lidiId) VALUES ('Krolík', 1);
+INSERT INTO Person (nickName, lidiId) VALUES ('Kotelník', 2);
