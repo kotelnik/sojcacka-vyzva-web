@@ -11,10 +11,10 @@ API související s tabulkou Person (tedy uživatelem).
 
 #### Current User
 
-GET /vyzvy/api.php?path=/currentUser
+```GET /vyzvy/api.php?path=/currentUser```
 
 Response (example):
-```
+```json
 {
     "id": 123,
     "firstName": "Jára",
@@ -43,10 +43,10 @@ Response (example):
 
 #### All Users
 
-GET /vyzvy/api.php?path=/user/list
+```GET /vyzvy/api.php?path=/user/list```
 
 Response (example):
-```
+```json
 [
     {
         "id": 123,
@@ -70,7 +70,7 @@ Response (example):
 ### Seznam výzev
 
 ### Vyhledávání výzev
-```
+```http
 GET /vyzvy/api.php?path=/search
   &executerId={executerId}
   &creatorId={creatorId}
@@ -85,7 +85,7 @@ GET /vyzvy/api.php?path=/search
 ```
 
 Response:
-```
+```json
 [
     {
         "id": 2,
@@ -129,10 +129,10 @@ Response:
 
 ### Vytvoření výzvy
 
-POST /vyzvy/api.php?path=/createChallenge
+```POST /vyzvy/api.php?path=/createChallenge```
 
 Request Body (JSON):
-```
+```json
 {
     "creatorId": 2,
     "title": "Pošli dopis",
@@ -149,10 +149,10 @@ Response: http status 200
 
 ### Update výzvy
 
-PUT /vyzvy/api.php?path=/updateChallenge
+```PUT /vyzvy/api.php?path=/updateChallenge```
 
 Request Body (JSON):
-```
+```json
 {
     "id": 1,
     "executerId": 2,
