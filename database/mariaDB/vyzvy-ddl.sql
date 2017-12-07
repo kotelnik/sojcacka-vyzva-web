@@ -20,6 +20,7 @@ CREATE TABLE Challenge (
     finished DATETIME,
     statusId INT NOT NULL,
     score DOUBLE NOT NULL,
+    duration BIGINT NOT NULL,
     difficultyId INT NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
