@@ -3,8 +3,9 @@
 // headers
 header('X-Frame-Options: DENY');
 header('Strict-Transport-Security: max-age=10886400; includeSubDomains; preload');
+header('Access-Control-Allow-Origin: *'); //TODO DELETE!!
 
-$KNOWN_API_PATHS = ['/currentUser', '/user/list', '/search', '/searchByCreator'];
+$KNOWN_API_PATHS = ['/currentUser', '/user/list', '/search', '/createChallenge', '/updateChallenge'];
 
 if (!isset($_GET['path'])) {
     http_response_code(400);
@@ -28,6 +29,7 @@ session_start();
 include './php/connection.php';
 include './php/util.php';
 
+/*
 if (!LoginHelper::isLogged()) {
     http_response_code(401);
     echo 'You need to log in.';
@@ -35,7 +37,9 @@ if (!LoginHelper::isLogged()) {
 }
 
 $PERSON_ID = $_SESSION["personId"];
+*/
+$PERSON_ID = "1";
 
-include "./php/api/$api_path.php";
+include "./php/api$api_path.php";
 
 ?>

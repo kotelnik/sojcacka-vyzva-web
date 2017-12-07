@@ -139,7 +139,7 @@ Request Body (JSON):
     "description": "popis",
     "score": "500",
     "durationSec": 3600,
-    "difficultyId": 1,
+    "difficultyId": 1
 }
 ```
 
@@ -163,7 +163,7 @@ Request Body (JSON):
     "statusId": 2,
     "score": "500",
     "durationSec": 3600,
-    "difficultyId": 1,
+    "difficultyId": 1
 }
 ```
 
