@@ -1,0 +1,12 @@
+{
+    "id": 777,
+    "firstName": "Martin",
+    "lastName": "Kotelník",
+    "nickName": "Mástr",
+    "scoreChallenges": 98465465,
+    "currentChallenge": {
+        "title": "Protect City",
+        "timeToFinishSec": 7777
+    }
+}
+

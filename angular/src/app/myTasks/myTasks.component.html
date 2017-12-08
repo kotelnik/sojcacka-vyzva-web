@@ -1,0 +1,25 @@
+<div *ngIf="currentUser.currentChallenge">
+<h2>Současná výzva</h2>
+<div class="row">
+  <h3 class="col-6">{{ currentUser.currentChallenge.title }}</h3>
+  <div class="col-3">{{ currentUser.currentChallenge.dueTime }}</div>
+  <div class="col-3">{{ currentUser.currentChallenge.score }}</div>
+</div>
+<div class="row">
+  <p class="col-12">{{ currentUser.currentChallenge.description }}</p>
+</div>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Výzva</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let challenge of myChallenges">
+      <td>{{ challenge.title }} </td>
+      <td>{{ challenge.statusId }} </td>
+    </tr>
+  </tbody>
+</table>

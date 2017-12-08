@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="jumbotron row">
+    <div class="col-9">
+    <h1>Dášto</h1>
+    <p>Máš přesně týden na splnění zadaného úkolu. Dokaž, že jsi správný Supersojčák. Dáš to?</p>
+    </div>
+    <div class="col-3">
+      <app-currentUser [currentUser]="currentUser"></app-currentUser>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <ngb-tabset justify="justified" type="pills">
+        <ngb-tab title="Moje úkoly">
+          <ng-template ngbTabContent>
+            <app-myTasks [currentUser]="currentUser" [myChallenges]="myChallenges"></app-myTasks>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Všechny úkoly">
+          <ng-template ngbTabContent>
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Nová výzva</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Tohle je formulář, fakt...</p>
+              <button type="button" class="btn btn-primary" (click)="addChallenge()" (click)="c('Close click')">Přidat</button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Zavřít</button>
+            </div>
+          </ng-template>
+          
+          <button class="btn btn-lg btn-outline-primary float-right" (click)="open(content)">Přidat výzvu</button>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Supersojčák</th>
+                  <th>Výzva</th>
+                  <th>Datum startu</th>
+                  <th>Splněno</th>
+                  <th>Obtížnost</th>
+                  <th>Autor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let challenge of solvedChallenges">
+                  <td>{{ challenge.executerId }}</td>
+                  <td>{{ challenge.title }} </td>
+                  <td>{{ challenge.started }} </td>
+                  <td>{{ challenge.finished }} </td>
+                  <td>{{ challenge.difficultyId }} </td>
+                  <td>{{ challenge.creatorId }} </td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Supersojčáci">
+          <ng-template ngbTabContent>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Supersojčák</th>
+                  <th>Body</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of users" [class.success]="user.hasChallenge">
+                  <td>{{ user.nickName}}</td>
+                  <td>{{ user.scoreChallenges }} </td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+</div>
