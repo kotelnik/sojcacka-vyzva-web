@@ -153,7 +153,7 @@ Response: http status 200
 
 ### Update výzvy
 
-```PUT /vyzvy/api.php?path=/updateChallenge```
+```POST /vyzvy/api.php?path=/updateChallenge```
 
 Request Body (JSON):
 ```json

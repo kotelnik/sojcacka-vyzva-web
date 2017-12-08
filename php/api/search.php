@@ -21,6 +21,7 @@ if (isset($_GET['creatorId']) && is_numeric($_GET['creatorId'])) {
     $creatorId = mysqli_real_escape_string($connection, $_GET['creatorId']);
     $sql = $sql.' creatorId = '.$creatorId;
 }
+$sql = $sql . ApiHelper::getSqlPartForNumberParameter('statusId', $connection, $sql);
 $sql = $sql . ApiHelper::getSqlPartForNumberParameter('score', $connection, $sql);
 $sql = $sql . ApiHelper::getSqlPartForNumberParameter('difficultyId', $connection, $sql);
 $sql = $sql . ApiHelper::getSqlPartForNumberParameter('durationSec', $connection, $sql);

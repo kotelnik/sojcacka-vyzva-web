@@ -19,13 +19,15 @@ if (!$jsonRequest) {
 // connect to database
 $connection = Connection::connectForReadWrite();
 
-$sql = 'INSERT INTO Challenge (creatorId, title, description, score, durationSec, difficultyId) VALUES (';
-$sql = $sql . mysqli_real_escape_string($connection, $jsonRequest['creatorId']) . ', ';
-$sql = $sql . "'" . mysqli_real_escape_string($connection, $jsonRequest['title']) . '", ';
-$sql = $sql . "'" . mysqli_real_escape_string($connection, $jsonRequest['description']) . '", ';
-$sql = $sql . mysqli_real_escape_string($connection, $jsonRequest['score']) . ', ';
-$sql = $sql . mysqli_real_escape_string($connection, $jsonRequest['durationSec']) . ', ';
-$sql = $sql . mysqli_real_escape_string($connection, $jsonRequest['difficultyId']) . ')';
+$sql = 'INSERT INTO Challenge (statusId, created, creatorId, title, description, score, durationSec, difficultyId) VALUES (1,now(),';
+$sql = $sql . mysqli_real_escape_string($connection, $jsonRequest->{'creatorId'}) . ', ';
+$sql = $sql . '\'' . mysqli_real_escape_string($connection, $jsonRequest->{'title'}) . '\', ';
+$sql = $sql . '\'' . mysqli_real_escape_string($connection, $jsonRequest->{'description'}) . '\', ';
+$sql = $sql . mysqli_real_escape_string($connection, $jsonRequest->{'score'}) . ', ';
+$sql = $sql . mysqli_real_escape_string($connection, $jsonRequest->{'durationSec'}) . ', ';
+$sql = $sql . mysqli_real_escape_string($connection, $jsonRequest->{'difficultyId'}) . ')';
+
+error_log('sql: ' . $sql);
 
 $query = mysqli_query($connection, $sql);
 

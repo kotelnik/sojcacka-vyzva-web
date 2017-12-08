@@ -9,7 +9,9 @@ INSERT INTO ChallengeDifficulty (id, name) VALUES (4, 'die_hard');
 
 INSERT INTO Person (nickName, lidiId) VALUES ('Krolík', 1);
 INSERT INTO Person (nickName, lidiId) VALUES ('Kotelník', 2);
+INSERT INTO Person (nickName, lidiId) VALUES ('Petříček', 3);
 
 --INSERT INTO Challenge (creatorId, executerId, title, description, created, started, statusId, score, durationSec, difficultyId) VALUES (2, 1, 'Pošli dopis', 'popis', now(), now(), 2, 500, 3600, 1);
 --INSERT INTO Challenge (creatorId, executerId, title, description, created, started, statusId, score, durationSec, difficultyId) VALUES (1, 2, 'Běhej', 'každý den do práce', now(), now(), 2, 500, 3600, 1);
 --INSERT INTO Challenge (creatorId, executerId, title, description, created, started, statusId, score, durationSec, difficultyId) VALUES (1, NULL, 'Hraj na počítači', 'každý večer', now(), now(), 2, 500, 3600, 4);
+--INSERT INTO Challenge (creatorId, executerId, title, description, created, started, statusId, score, durationSec, difficultyId) VALUES (1, NULL, 'Další', 'každý večer', now(), now(), 3, 500, 3600, 3);
