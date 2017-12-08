@@ -53,7 +53,8 @@ Response (example):
         "firstName": "Jára",
         "lastName": "Cimrman",
         "nickName": "Jelcin",
-        "scoreChallenges": 4050
+        "scoreChallenges": 4050,
+        "hasChallenge": true
     },
     {
         "id": 124,
@@ -61,6 +62,7 @@ Response (example):
         "lastName": null,
         "nickName": "Sojka",
         "scoreChallenges": 340
+        "hasChallenge": false
     }
 ]
 ```
@@ -74,11 +76,13 @@ Response (example):
 GET /vyzvy/api.php?path=/search
   &executerId={executerId}
   &creatorId={creatorId}
+  &statusId={statusId}
   &score={score}
   &difficultyId={difficultyId}
   &durationSec={durationSec}
   &orderBy={executerId|difficultyId|score|durationSec|creatorId|created|started|finished|id}
   &ordering={asc|desc}
+  &statusIdGreater=true
   &scoreGreater=true
   &difficultyIdGreater=true
   &durationSecGreater=true
