@@ -61,7 +61,7 @@ Response (example):
         "firstName": null,
         "lastName": null,
         "nickName": "Sojka",
-        "scoreChallenges": 340
+        "scoreChallenges": 340,
         "hasChallenge": false
     }
 ]
