@@ -6,6 +6,7 @@
     </div>
     <div class="col-3">
       <app-currentUser [currentUser]="currentUser"></app-currentUser>
+      <button type="button" (click)="challengeFinished()" *ngIf="currentUser.currentChallenge !== null" class="btn btn-primary">Splnil jsem!</button>
     </div>
   </div>
   <div class="row">
@@ -13,7 +14,7 @@
       <ngb-tabset justify="justified" type="pills">
         <ngb-tab title="Moje úkoly">
           <ng-template ngbTabContent>
-            <div *ngIf="!currentUser.currentChallenge">
+            <div *ngIf="currentUser.currentChallenge === null">
               <div class="text-center"><h2>Chceš výzvu? Ukaž jakej jsi?</h2></div>
                 <div class="row">
                   <div class="col-1"></div>

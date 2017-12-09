@@ -84,6 +84,15 @@ export class AppComponent {
     )
   }
 
+  challengeFinished(){
+  let params = {"id": this.currentUser.currentChallenge.id, "statusId" : 3};
+  this.http.post(this.ROOT_URL + "/updateChallenge", params)
+    .subscribe(
+        this.myChallenges.push(this.currentUser.currentChallenge);
+        this.currentUser.currentChallenge = null;
+    )
+  }
+
   ngOnInit() {
     this.getCurrentUser();
     this.getUsers();
