@@ -38,7 +38,7 @@ if ($query) {
     $sql = 'SELECT * FROM Challenge WHERE id='.$id;
     $query = mysqli_query($connection, $sql);
     $row = mysqli_fetch_array($query);
-    $result = ApiHelper::copyChallenge2($row, $connection);
+    $result = ApiHelper::copyChallenge($row, $connection);
     header('Content-Type: application/json; charset=UTF-8');
     echo json_encode($result);
 

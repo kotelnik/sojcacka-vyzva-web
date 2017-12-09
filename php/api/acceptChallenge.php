@@ -59,7 +59,7 @@ if (!$query) {
 }
 
 // success
-$result = ApiHelper::copyChallenge2($chosenChallenge, $connection);
+$result = ApiHelper::copyChallenge($chosenChallenge, $connection);
 header('Content-Type: application/json; charset=UTF-8');
 echo json_encode($result);
 

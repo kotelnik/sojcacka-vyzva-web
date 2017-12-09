@@ -45,7 +45,7 @@ $challenge_query = mysqli_query($connection, $sql);
 
 $result = array();
 while ($row = mysqli_fetch_array($challenge_query)) {
-    $item = ApiHelper::copyChallenge2($row, $connection);
+    $item = ApiHelper::copyChallenge($row, $connection);
     array_push($result, $item);
 }
 

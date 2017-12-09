@@ -56,7 +56,31 @@ class ApiHelper {
         return $copy;
     }
 
-    static function copyChallenge2($db_row, $connection) {
+    static function copyChallenge($db_row, $connection) {
+        $copy = array();
+        $copy['id'] = (int) $db_row['id'];
+        $copy['creator'] = ApiHelper::loadPerson($db_row['creatorId'], $connection);
+        $copy['executer'] = ApiHelper::loadPerson($db_row['executerId'], $connection);
+        $copy['title'] = $db_row['title'];
+        $copy['description'] = $db_row['description'];
+        $copy['created'] = $db_row['created'];
+        $copy['started'] = $db_row['started'];
+        $copy['finished'] = $db_row['finished'];
+        $copy['status'] = ApiHelper::loadStatus($db_row['statusId'], $connection);
+        $copy['score'] = (int) $db_row['score'];
+        $copy['durationSec'] = (int) $db_row['durationSec'];
+        $copy['difficulty'] = ApiHelper::loadDifficulty($db_row['difficultyId'], $connection);
+        if ($db_row['started']) {
+            date_default_timezone_set("Europe/Prague");
+            $started = strtotime($db_row['started']);
+            $duration = (int) $copy['durationSec'];
+            $dueTime = date("Y-m-d H:i:s", ($started + $duration));
+            $copy['dueTime'] = $dueTime;
+        }
+        return $copy;
+    }
+
+    static function copyChallenge2($db_row, $connection, $cache) {
         $copy = array();
         $copy['id'] = (int) $db_row['id'];
         $copy['creator'] = ApiHelper::loadPerson($db_row['creatorId'], $connection);
