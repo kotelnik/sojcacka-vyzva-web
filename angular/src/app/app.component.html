@@ -13,28 +13,18 @@
       <ngb-tabset justify="justified" type="pills">
         <ngb-tab title="Moje úkoly">
           <ng-template ngbTabContent>
+            <button (click)="acceptChallenge()" class="btn">Jsem hustej!</button>
             <app-myTasks [currentUser]="currentUser" [myChallenges]="myChallenges"></app-myTasks>
           </ng-template>
         </ngb-tab>
         <ngb-tab title="Všechny úkoly">
           <ng-template ngbTabContent>
-          <ng-template #content let-c="close" let-d="dismiss">
-            <div class="modal-header">
-              <h4 class="modal-title">Nová výzva</h4>
-              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="row">
+              <label class="col-3">Výzva:
+                <input [(ngModel)]="challengeName" placeholder="titulek">
+              </label>
             </div>
-            <div class="modal-body">
-              <p>Tohle je formulář, fakt...</p>
-              <button type="button" class="btn btn-primary" (click)="addChallenge()" (click)="c('Close click')">Přidat</button>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Zavřít</button>
-            </div>
-          </ng-template>
-          
-          <button class="btn btn-lg btn-outline-primary float-right" (click)="open(content)">Přidat výzvu</button>
+            <button (click)="createChallenge()" class="btn btn-primary">Vytvoř výzvu</button>
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -48,12 +38,12 @@
               </thead>
               <tbody>
                 <tr *ngFor="let challenge of solvedChallenges">
-                  <td>{{ challenge.executerId }}</td>
+                  <td>{{ getExecuter(challenge) }}</td>
                   <td>{{ challenge.title }} </td>
                   <td>{{ challenge.started }} </td>
                   <td>{{ challenge.finished }} </td>
-                  <td>{{ challenge.difficultyId }} </td>
-                  <td>{{ challenge.creatorId }} </td>
+                  <td>{{ challenge.difficulty.name }} </td>
+                  <td>{{ challenge.creator.nickName }} </td>
                 </tr>
               </tbody>
             </table>

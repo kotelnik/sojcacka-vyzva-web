@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Challenge } from './challenge';
 
 @Component({
   selector: 'app-root',
@@ -10,29 +11,11 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 export class AppComponent {
 
-  readonly ROOT_URL = 'https://sojcaci.cz/vyzvy/api.php?path=';
+readonly ROOT_URL = 'http://10.0.0.40/~kotelnik/sojcaci/vyzvy/api.php?path=';
   closeResult: string;
 
-  constructor(private http:HttpClient, private modalService: NgbModal) {
+  constructor(private http:HttpClient) {
     this.getCurrentUser();
-  }
-
-  open(content) {
-    this.modalService.open(content).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
   }
 
   currentUser:any;
@@ -48,7 +31,14 @@ export class AppComponent {
         this.currentUser = data;
       }
     )
+  }
 
+  getExecuter(challenge:any){
+    if( challenge.executer === null)
+    {
+      return null;
+    }
+    return challenge.executer.nickName;
   }
 
   getUsers(){
@@ -61,7 +51,8 @@ export class AppComponent {
   }
 
   getSolvedChallenges(){
-    this.http.get(this.ROOT_URL + "/search&statusId=2")
+    //this.http.get(this.ROOT_URL + "/search&statusId=2")
+    this.http.get(this.ROOT_URL + "/search")
     .subscribe(
       (data:any[]) => {
         this.solvedChallenges = data;
@@ -71,8 +62,25 @@ export class AppComponent {
     )
   }
 
-  addChallenge(){
-    console.log("Added");
+  acceptChallenge(){
+    this.http.post(this.ROOT_URL + "/acceptChallenge", {})
+    .subscribe(
+      (data:any) => {
+        console.log(data);
+      }
+    )
+  }
+
+  challengeName="";
+
+  createChallenge(){
+  let params = {"creatorId": "3", "title" : this.challengeName, "description" : "v žitě", "score" : 500, "durationSec" : 5, "difficultyId" : 2};
+    this.http.post(this.ROOT_URL + "/createChallenge", params)
+    .subscribe(
+      (challenge:any) => {
+        this.solvedChallenges.push(challenge);
+      }
+    )
   }
 
   ngOnInit() {
