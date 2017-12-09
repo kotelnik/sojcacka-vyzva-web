@@ -23,13 +23,13 @@ Response (example):
     "scoreChallenges": 4050,
     "currentChallenge": {
         "id": 2,
-        "creatorId": {
+        "creator": {
             "firstName": "Pepa",
             "lastName": "Chytrej",
             "nickName": "Chytrák",
             "scoreChallenges": 3000,
         },
-        "executerId": {
+        "executer": {
             "firstName": "Karel",
             "lastName": "Mladej",
             "nickName": "Mládenec",
@@ -40,13 +40,13 @@ Response (example):
         "created": "2017-12-07 21:58:09",
         "started": "2017-12-07 21:58:09",
         "finished": null,
-        "statusId": {
+        "status": {
             "id": 2,
             "name": "started"
         },
         "score": "500",
         "durationSec": 3600,
-        "difficultyId": {
+        "difficulty": {
             "id": 1,
             "name": "easy"
         },
@@ -122,13 +122,13 @@ Response:
 [
     {
         "id": 2,
-        "creatorId": {
+        "creator": {
             "firstName": "Pepa",
             "lastName": "Chytrej",
             "nickName": "Chytrák",
             "scoreChallenges": 3000,
         },
-        "executerId": {
+        "executer": {
             "firstName": "Karel",
             "lastName": "Mladej",
             "nickName": "Mládenec",
@@ -139,21 +139,27 @@ Response:
         "created": "2017-12-07 21:58:09",
         "started": "2017-12-07 21:58:09",
         "finished": null,
-        "statusId": 2,
+        "status": {
+            "id": 2,
+            "name": "started"
+        },
         "score": "500",
         "durationSec": 3600,
-        "difficultyId": 1,
+        "difficulty": {
+            "id": 1,
+            "name": "easy"
+        },
         "dueTime": "2017-12-08 21:58:09"
     },
     {
         "id": 1,
-        "creatorId": {
+        "creator": {
             "firstName": "Pepa",
             "lastName": "Chytrej",
             "nickName": "Chytrák",
             "scoreChallenges": 3000,
         },
-        "executerId": {
+        "executer": {
             "firstName": "Karel",
             "lastName": "Mladej",
             "nickName": "Mládenec",
@@ -164,13 +170,13 @@ Response:
         "created": "2017-12-07 21:58:09",
         "started": "2017-12-07 21:58:09",
         "finished": null,
-        "statusId": {
+        "status": {
             "id": 2,
             "name": "started"
         },
         "score": "500",
         "durationSec": 3600,
-        "difficultyId": {
+        "difficulty": {
             "id": 1,
             "name": "easy"
         },
@@ -251,4 +257,54 @@ Request Body (JSON):
 Response: http status 200
 
 * difficultyId je nepovinné
-* 
+
+
+### Enums
+
+#### ChallengeStatus
+
+```GET /vyzvy/api.php?path=/challengeStatuses```
+
+Response Body (JSON):
+```json
+[
+    {
+        "id": 1,
+        "name": "unassigned"
+    },
+    {
+        "id": 2,
+        "name": "started"
+    },
+    {
+        "id": 3,
+        "name": "finished"
+    }
+]
+```
+
+#### ChallengeDifficulties
+
+```GET /vyzvy/api.php?path=/challengeDifficulties```
+
+Response Body (JSON):
+```json
+[
+  {
+    "id": 1,
+    "name": "easy"
+  },
+  {
+    "id": 2,
+    "name": "moderate"
+  },
+  {
+    "id": 3,
+    "name": "hard"
+  },
+  {
+    "id": 4,
+    "name": "die_hard"
+  }
+]
+```

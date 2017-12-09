@@ -15,6 +15,37 @@ class LoginHelper {
 
 class ApiHelper {
 
+    static function loadPerson($id, $connection) {
+        if ($id == null) {
+            return null;
+        }
+        $row = mysqli_fetch_array(mysqli_query($connection, 'SELECT * FROM Person WHERE id='.$id));
+        return ApiHelper::copyUser($row);
+    }
+
+    static function loadStatus($id, $connection) {
+        if ($id == null) {
+            return null;
+        }
+        $row = mysqli_fetch_array(mysqli_query($connection, 'SELECT * FROM ChallengeStatus WHERE id='.$id));
+        return ApiHelper::copyIdName($row);
+    }
+
+    static function loadDifficulty($id, $connection) {
+        if ($id == null) {
+            return null;
+        }
+        $row = mysqli_fetch_array(mysqli_query($connection, 'SELECT * FROM ChallengeDifficulty WHERE id='.$id));
+        return ApiHelper::copyIdName($row);
+    }
+
+    static function copyIdName($db_row) {
+        $copy = array();
+        $copy['id'] = (int) $db_row['id'];
+        $copy['name'] = $db_row['name'];
+        return $copy;
+    }
+
     static function copyUser($db_row) {
         $copy = array();
         $copy['id'] = (int) $db_row['id'];
@@ -25,20 +56,20 @@ class ApiHelper {
         return $copy;
     }
 
-    static function copyChallenge($db_row) {
+    static function copyChallenge2($db_row, $connection) {
         $copy = array();
         $copy['id'] = (int) $db_row['id'];
-        $copy['creatorId'] = $db_row['creatorId'] == null ? null : (int) $db_row['creatorId'];
-        $copy['executerId'] = $db_row['executerId'] == null ? null : (int) $db_row['executerId'];
+        $copy['creator'] = ApiHelper::loadPerson($db_row['creatorId'], $connection);
+        $copy['executer'] = ApiHelper::loadPerson($db_row['executerId'], $connection);
         $copy['title'] = $db_row['title'];
         $copy['description'] = $db_row['description'];
         $copy['created'] = $db_row['created'];
         $copy['started'] = $db_row['started'];
         $copy['finished'] = $db_row['finished'];
-        $copy['statusId'] = (int) $db_row['statusId'];
+        $copy['status'] = ApiHelper::loadStatus($db_row['statusId'], $connection);
         $copy['score'] = (int) $db_row['score'];
         $copy['durationSec'] = (int) $db_row['durationSec'];
-        $copy['difficultyId'] = (int) $db_row['difficultyId'];
+        $copy['difficulty'] = ApiHelper::loadDifficulty($db_row['difficultyId'], $connection);
         if ($db_row['started']) {
             date_default_timezone_set("Europe/Prague");
             $started = strtotime($db_row['started']);

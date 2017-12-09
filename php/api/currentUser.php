@@ -3,12 +3,11 @@
 // connect to database
 $connection = Connection::connectForRead();
 
-$person_row = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM Person WHERE id = '$PERSON_ID'"));
 $challenge_row = mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM Challenge WHERE executerId = '$PERSON_ID'"));
 
-$result = ApiHelper::copyUser($person_row);
+$result = ApiHelper::loadPerson($PERSON_ID, $connection);
 if ($challenge_row) {
-    $currentChallenge = ApiHelper::copyChallenge($challenge_row);
+    $currentChallenge = ApiHelper::copyChallenge2($challenge_row, $connection);
     $result['currentChallenge'] = $currentChallenge;
 }
 
