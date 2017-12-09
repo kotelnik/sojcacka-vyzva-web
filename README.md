@@ -44,7 +44,7 @@ Response (example):
             "id": 2,
             "name": "started"
         },
-        "score": "500",
+        "score": 500,
         "durationSec": 3600,
         "difficulty": {
             "id": 1,
@@ -143,7 +143,7 @@ Response:
             "id": 2,
             "name": "started"
         },
-        "score": "500",
+        "score": 500,
         "durationSec": 3600,
         "difficulty": {
             "id": 1,
@@ -174,7 +174,7 @@ Response:
             "id": 2,
             "name": "started"
         },
-        "score": "500",
+        "score": 500,
         "durationSec": 3600,
         "difficulty": {
             "id": 1,
@@ -213,7 +213,29 @@ Request Body (JSON):
 Response (JSON):
 ```json
 {
-    "id": 123
+    "id": 123,
+    "creator": {
+        "firstName": "Pepa",
+        "lastName": "Chytrej",
+        "nickName": "Chytrák",
+        "scoreChallenges": 3000,
+    },
+    "executer": null,
+    "title": "Pošli dopis2",
+    "description": "popis2",
+    "created": "2017-12-07 21:58:09",
+    "started": null,
+    "finished": null,
+    "status": {
+        "id": 1,
+        "name": "unassigned"
+    },
+    "score": 500,
+    "durationSec": 3600,
+    "difficulty": {
+        "id": 1,
+        "name": "easy"
+    }
 }
 ```
 
@@ -254,9 +276,42 @@ Request Body (JSON):
 }
 ```
 
-Response: http status 200
-
 * difficultyId je nepovinné
+
+Response (JSON):
+```json
+{
+    "id": 123,
+    "creator": {
+        "firstName": "Pepa",
+        "lastName": "Chytrej",
+        "nickName": "Chytrák",
+        "scoreChallenges": 3000,
+    },
+    "executer": {
+        "firstName": "Kája",
+        "lastName": "Chytrej",
+        "nickName": "Chytrák",
+        "scoreChallenges": 3000,
+    },
+    "title": "Pošli dopis2",
+    "description": "popis2",
+    "created": "2017-12-07 21:58:09",
+    "started": "2017-12-09 21:58:09",
+    "finished": null,
+    "status": {
+        "id": 2,
+        "name": "started"
+    },
+    "score": 500,
+    "durationSec": 3600,
+    "difficulty": {
+        "id": 1,
+        "name": "easy"
+    },
+    "dueTime": "2017-12-10 21:58:09"
+}
+```
 
 
 ### Enums
