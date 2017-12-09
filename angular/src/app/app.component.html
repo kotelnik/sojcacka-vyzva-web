@@ -13,7 +13,20 @@
       <ngb-tabset justify="justified" type="pills">
         <ngb-tab title="Moje úkoly">
           <ng-template ngbTabContent>
-            <button (click)="acceptChallenge()" class="btn">Jsem hustej!</button>
+            <div *ngIf="!currentUser.currentChallenge">
+              <div class="text-center"><h2>Chceš výzvu? Ukaž jakej jsi?</h2></div>
+                <div class="row">
+                  <div class="col-1"></div>
+                  <div class="col-10">
+                    <div class="row">
+                      <button type="button" class="col-2 btn btn-default" disabled="disabled">Nechci, jsem srab</button>
+                      <div class="col-1"></div>
+                      <button (click)="acceptChallenge()" class="btn col-9 ">Chci výzvu, jsem totiž hustej!</button>
+                    </div>
+                  <div class="col-1"></div>
+                </div>
+              </div>
+            </div>
             <app-myTasks [currentUser]="currentUser" [myChallenges]="myChallenges"></app-myTasks>
           </ng-template>
         </ngb-tab>

@@ -11,7 +11,8 @@ import { Challenge } from './challenge';
 
 export class AppComponent {
 
-readonly ROOT_URL = 'http://10.0.0.40/~kotelnik/sojcaci/vyzvy/api.php?path=';
+  //readonly ROOT_URL = 'http://10.0.0.40/~kotelnik/sojcaci/vyzvy/api.php?path=';
+  readonly ROOT_URL = 'https://sojcaci.cz/vyzvy/api.php?path=';
   closeResult: string;
 
   constructor(private http:HttpClient) {
