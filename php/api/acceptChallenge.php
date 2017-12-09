@@ -11,16 +11,13 @@ error_log('requestBody: '.$requestBody);
 $jsonRequest = json_decode($requestBody, true);
 
 if (!$jsonRequest) {
-    http_response_code(400);
-    echo 'Request JSON is not valid.';
-    exit();
+    $jsonRequest = array();
 }
 
 // connect to database
 $connection = Connection::connectForReadWrite();
 
-$sql = 'SELECT COUNT(*) FROM Challenge WHERE creatorId != '.$PERSON_ID.' AND executerId IS NULL';
-
+$sql = 'SELECT COUNT(*) FROM Challenge WHERE executerId IS NULL';
 if (isset($jsonRequest['difficultyId'])) {
     $difficultyId = $jsonRequest['difficultyId'];
     $sql = $sql.' AND difficultyId='.$difficultyId;
@@ -35,7 +32,12 @@ if ($count === 0) {
     exit();
 }
 
-$sql = 'SELECT * FROM Challenge WHERE creatorId != '.$PERSON_ID.' AND executerId IS NULL';
+$sql = 'SELECT * FROM Challenge WHERE executerId IS NULL';
+if (isset($jsonRequest['difficultyId'])) {
+    $difficultyId = $jsonRequest['difficultyId'];
+    $sql = $sql.' AND difficultyId='.$difficultyId;
+}
+error_log($sql);
 $query = mysqli_query($connection, $sql);
 
 $existingChallenges = array();
