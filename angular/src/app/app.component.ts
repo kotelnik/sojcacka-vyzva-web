@@ -66,7 +66,7 @@ readonly ROOT_URL = 'http://10.0.0.40/~kotelnik/sojcaci/vyzvy/api.php?path=';
     this.http.post(this.ROOT_URL + "/acceptChallenge", {})
     .subscribe(
       (data:any) => {
-        console.log(data);
+        this.currentUser.currentChallenge = data;
       }
     )
   }
