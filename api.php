@@ -4,8 +4,15 @@
 header('X-Frame-Options: DENY');
 header('Strict-Transport-Security: max-age=10886400; includeSubDomains; preload');
 header('Access-Control-Allow-Origin: *'); //TODO DELETE!!
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS"); //TODO DELETE!!
+header("Access-Control-Allow-Headers: Origin, Content-Type"); //TODO DELETE!!
 
-$KNOWN_API_PATHS = ['/currentUser', '/user/list', '/search', '/createChallenge', '/updateChallenge'];
+// Handling the Preflight
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') { 
+    exit;
+}
+
+$KNOWN_API_PATHS = ['/currentUser', '/user/list', '/search', '/createChallenge', '/updateChallenge', '/acceptChallenge', '/acceptedChallenges', '/createdChallenges', '/challengeDifficulties', '/challengeStatuses'];
 
 if (!isset($_GET['path'])) {
     http_response_code(400);
