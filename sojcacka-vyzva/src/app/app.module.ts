@@ -8,6 +8,9 @@ import { UsersComponent } from './users/users.component';
 
 import { AppRoutingModule } from './/app-routing.module';
 import { ChallengesComponent } from './challenges/challenges.component';
+import { MessageService } from './message.service';
+import { ChallengeService } from './challenge.service';
+import { MessagesComponent } from './messages/messages.component';
 
 
 @NgModule({
@@ -15,13 +18,14 @@ import { ChallengesComponent } from './challenges/challenges.component';
     AppComponent,
     CurrentUserComponent,
     UsersComponent,
-    ChallengesComponent
+    ChallengesComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ ChallengeService, MessageService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

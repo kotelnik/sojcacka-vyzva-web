@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ChallengeService } from '../challenge.service';
+
 @Component({
   selector: 'app-challenges',
   templateUrl: './challenges.component.html',
@@ -8,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 export class ChallengesComponent implements OnInit {
 
   text = 'výzev';
-  constructor() { }
+  constructor(private challengeService: ChallengeService) { }
+
+  messageMe(): void{
+    this.challengeService.sendMessage();
+  }
 
   ngOnInit() {
   }
