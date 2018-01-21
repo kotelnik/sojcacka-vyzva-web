@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ChallengeService } from '../challenge.service';
+import { DataService } from '../data.service';
+import { Challenge } from '../challenge';
 
 @Component({
   selector: 'app-challenges',
@@ -9,14 +10,17 @@ import { ChallengeService } from '../challenge.service';
 })
 export class ChallengesComponent implements OnInit {
 
-  text = 'výzev';
-  constructor(private challengeService: ChallengeService) { }
+  challenges: Challenge[];
 
-  messageMe(): void{
-    this.challengeService.sendMessage();
-  }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.getChallenges();
+  }
+
+  getChallenges(): void {
+    this.dataService.getChallenges()
+      .subscribe(challenges => this.challenges = challenges);
   }
 
 }

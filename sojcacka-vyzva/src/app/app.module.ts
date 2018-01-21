@@ -8,10 +8,11 @@ import { UsersComponent } from './users/users.component';
 
 import { AppRoutingModule } from './/app-routing.module';
 import { ChallengesComponent } from './challenges/challenges.component';
-import { MessageService } from './message.service';
-import { ChallengeService } from './challenge.service';
 import { MessagesComponent } from './messages/messages.component';
-
+import { MessageService } from './message.service';
+import { DataService } from './data.service';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { ChallengeDetailComponent } from './challenge-detail/challenge-detail.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +20,15 @@ import { MessagesComponent } from './messages/messages.component';
     CurrentUserComponent,
     UsersComponent,
     ChallengesComponent,
-    MessagesComponent
+    MessagesComponent,
+    UserDetailComponent,
+    ChallengeDetailComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [ ChallengeService, MessageService ],
-  bootstrap: [AppComponent]
+  providers: [ DataService, MessageService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

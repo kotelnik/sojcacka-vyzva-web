@@ -1,4 +1,8 @@
-<p>
-  Tohle je seznam {{text}}.
-  <button (click)="messageMe()">baf</button>
-</p>
+<h2>Výzvy</h2>
+<ul>
+  <li *ngFor="let challenge of challenges">
+    <a routerLink="/challenge/{{challenge.id}}">
+      {{challenge.title}}
+    </a>
+  </li>
+</ul>

@@ -1,0 +1,4 @@
+<h2>{{challenge.title}}</h2>
+<div>Vytvořil: {{challenge.creator.nickName}} {{challenge.created | date:"d.M. y H:mm"}}</div>
+<p>{{challenge.description}}</p>
+<button (click)="goBack()">Zpět</button>
