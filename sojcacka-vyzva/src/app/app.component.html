@@ -1,9 +1,18 @@
 <app-messages></app-messages>
-<h1>Výzva</h1>
-<nav>
-	<a routerLink="/users">Uživatelé</a>
-	<a routerLink="/challenges">Všechny výzvy</a>
-</nav>
-<app-current-user></app-current-user>
-<router-outlet></router-outlet>
-<h5>pata</h5>
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="starter-template row">
+    <!--<h1>Výzva</h1>
+    <nav>
+    	<a routerLink="/users">Uživatelé</a>
+    	<a routerLink="/challenges">Všechny výzvy</a>
+    </nav>-->
+    <div class="col-sm-9">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="col-sm-3">
+      <app-current-user></app-current-user>
+    </div>
+    <h5>pata</h5>
+  </div>
+</div>

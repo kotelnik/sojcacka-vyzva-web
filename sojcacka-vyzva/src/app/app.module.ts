@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { ChallengeDetailComponent } from './challenge-detail/challenge-detail.component';
 import { UserInlineComponent } from './user-inline/user-inline.component';
 import { ChallengeInlineComponent } from './challenge-inline/challenge-inline.component';
+import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 
 @NgModule({
   declarations: [
@@ -27,10 +29,12 @@ import { ChallengeInlineComponent } from './challenge-inline/challenge-inline.co
     ChallengeDetailComponent,
     UserInlineComponent,
     ChallengeInlineComponent,
+    AppNavbarComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule.forRoot()
   ],
   providers: [ DataService, MessageService ],
   bootstrap: [ AppComponent ]
