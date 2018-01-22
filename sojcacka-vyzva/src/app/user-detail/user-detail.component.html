@@ -4,4 +4,11 @@
   {{user.lastName}} <br/>
   {{user.scoreChallenges}} bodů
 </div>
+
+<h3>Jeho úkoly:</h3>
+<ul>
+  <li *ngFor="let challenge of challenges">
+    <app-challenge-inline [challenge]= "challenge"></app-challenge-inline>  
+  </li>
+</ul>
 <button (click)="goBack()">Zpět</button>

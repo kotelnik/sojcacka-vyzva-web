@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { DataService } from '../data.service';
-import { User } from '../user';
+import { UserFull } from '../user';
+import { Challenge } from '../challenge';
 
 @Component({
   selector: 'app-user-detail',
@@ -12,7 +13,8 @@ import { User } from '../user';
 })
 export class UserDetailComponent implements OnInit {
 
-  user: User;
+  user: UserFull;
+  challenges: Challenge[];
 
   constructor(
     private dataService: DataService,
@@ -22,12 +24,19 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit() {
     this.getUser();
+    this.getUserPastChallenges();
   }
 
   getUser(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.dataService.getUser(id)
       .subscribe(user => this.user = user);
+  }
+
+  getUserPastChallenges(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.dataService.getUserChallenges(id)
+      .subscribe(challenges => this.challenges = challenges);
   }
 
   goBack(): void {

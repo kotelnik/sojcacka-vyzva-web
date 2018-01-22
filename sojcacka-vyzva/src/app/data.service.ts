@@ -33,6 +33,16 @@ export class DataService {
     return of(USERS_FULL.find(user => user.id === id));
   }
 
+  getUserChallenges(id: number): Observable<Challenge[]> {
+    const subFull: ChallengeFull[] = CHALLENGES_FULL.filter(challenge => (challenge.executer) && (challenge.executer.id === id));
+    const indices: number[] = [];
+    subFull.forEach(function (challenge) {
+       indices.push(challenge.id);
+      }
+    );
+    return of(CHALLENGES.filter(challenge => indices.includes(challenge.id)));
+  }
+
   sendMessage() {
     this.messageService.add('ble ble ble');
   }

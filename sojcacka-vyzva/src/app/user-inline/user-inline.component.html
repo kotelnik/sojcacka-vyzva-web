@@ -1,0 +1,6 @@
+<a routerLink="/user/{{user.id}}"
+  [class.green]="user.hasChallenge"
+  [class.red]="!user.hasChallenge">
+  {{user.nickName}}
+</a>
+	

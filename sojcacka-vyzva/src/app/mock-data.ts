@@ -114,6 +114,11 @@ export const CHALLENGES: Challenge[] = [
     title: 'Cvič',
     description: 'Udělej 7 dřepů.',
   },
+  {
+    id: 5,
+    title: 'Vař',
+    description: 'Dvakrát v týdnu uvař teplé jídlo.'
+  }
 ];
 
 export const CHALLENGES_FULL: ChallengeFull[] = [
@@ -192,10 +197,10 @@ export const CHALLENGES_FULL: ChallengeFull[] = [
     description: 'Dosteň se do Roklinky.',
     created: '2017-12-07 21:58:09',
     started: '2018-01-21 21:58:53',
-    finished: null,
+    finished: '2018-01-21 22:58:53',
     status: {
-      id: 2,
-      name: 'started'
+      id: 3,
+      name: 'finished'
     },
     score: 500,
     durationSec: 3600,
@@ -214,10 +219,10 @@ export const CHALLENGES_FULL: ChallengeFull[] = [
       hasChallenge: false
     },
     executer: {
-      id: 4,
-      nickName: 'Baba',
-      scoreChallenges: 70,
-      hasChallenge: false
+      id: 2,
+      nickName: 'Poleno',
+      scoreChallenges: 302,
+      hasChallenge: true
     },
     title: 'Cvič',
     description: 'Udělej 7 dřepů.',
@@ -236,23 +241,54 @@ export const CHALLENGES_FULL: ChallengeFull[] = [
     },
     dueTime: '2017-12-08 21:58:09'
   },
+  {
+    id: 5,
+    creator: {
+      id: 4,
+      nickName: 'Baba',
+      scoreChallenges: 70,
+      hasChallenge: false
+    },
+    executer: {
+      id: 3,
+      nickName: 'Arrow',
+      scoreChallenges: 303,
+      hasChallenge: true
+    },
+    title: 'Vař',
+    description: 'Dvakrát v týdnu uvař teplé jídlo.',
+    created: '2017-12-07 21:58:09',
+    started: '2017-12-07 21:59:09',
+    finished: null,
+    status: {
+      id: 3,
+      name: 'finished'
+    },
+    score: 90,
+    durationSec: 3600,
+    difficulty: {
+      id: 1,
+      name: 'easy'
+    },
+    dueTime: '2017-12-08 21:59:09'
+  }
 ];
 
 export const DIFFICULTIES = [
   {
     id: 1,
-    name: "easy"
+    name: 'easy'
   },
   {
     id: 2,
-    name: "moderate"
+    name: 'moderate'
   },
   {
     id: 3,
-    name: "hard"
+    name: 'hard'
   },
   {
     id: 4,
-    name: "die_hard"
+    name: 'die_hard'
   }
 ];
