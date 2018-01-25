@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { MessageService } from './message.service';
 import { User, UserFull } from './user';
@@ -11,10 +13,17 @@ import { USERS, CHALLENGES, CHALLENGES_FULL, CURRENT_USER, USERS_FULL } from './
 @Injectable()
 export class DataService {
 
-  constructor(private messageService: MessageService) { }
+  private challengesUrl = 'api/challenges';
+
+  constructor(private messageService: MessageService, private http: HttpClient ) { }
 
   getChallenges(): Observable<Challenge[]> {
-    return of(CHALLENGES);
+    // return of(CHALLENGES);
+    return this.http.get<Challenge[]>(this.challengesUrl)
+                    .pipe(
+                      tap(challenges => this.log('Challenges fetched.')),
+                      catchError(this.handleError('getHeroes', []))
+                    );
   }
 
   getUsers(): Observable<User[]> {
@@ -43,8 +52,22 @@ export class DataService {
     return of(CHALLENGES.filter(challenge => indices.includes(challenge.id)));
   }
 
-  sendMessage() {
-    this.messageService.add('ble ble ble');
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+
+  private log(message: string) {
+    this.messageService.add('ble ble ble: ' + message);
   }
 
 }

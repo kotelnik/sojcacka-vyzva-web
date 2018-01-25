@@ -93,34 +93,6 @@ export const USERS_FULL: UserFull[] = [
 
 export const CURRENT_USER: UserFull = USERS_FULL[5];
 
-//export const CHALLENGES: Challenge[] = [
-//  {
-//    id: 1,
-//    title: 'Zdravý spánek',
-//    description: 'Choď spát každý den před 23:00.',
-//  },
-//  {
-//    id: 2,
-//    title: 'Poraz zlo!',
-//    description: 'Hoď prsten moci do Mordoru.',
-//  },
-//  {
-//    id: 3,
-//    title: 'Uteč z Kraje.',
-//    description: 'Dosteň se do Roklinky.',
-//  },
-//  {
-//    id: 4,
-//    title: 'Cvič',
-//    description: 'Udělej 7 dřepů.',
-//  },
-//  {
-//    id: 5,
-//    title: 'Vař',
-//    description: 'Dvakrát v týdnu uvař teplé jídlo.'
-//  }
-//];
-
 export const CHALLENGES: Challenge[] = [
   {
     id: 1,
