@@ -17,6 +17,7 @@ import { ChallengeDetailComponent } from './challenge-detail/challenge-detail.co
 import { UserInlineComponent } from './user-inline/user-inline.component';
 import { ChallengeInlineComponent } from './challenge-inline/challenge-inline.component';
 import { AppNavbarComponent } from './app-navbar/app-navbar.component';
+import { ChallengeListComponent } from './challenge-list/challenge-list.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AppNavbarComponent } from './app-navbar/app-navbar.component';
     UserInlineComponent,
     ChallengeInlineComponent,
     AppNavbarComponent,
+    ChallengeListComponent,
   ],
   imports: [
     BrowserModule,

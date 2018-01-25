@@ -4,7 +4,9 @@ import { Enum } from './enum';
 export class Challenge {
   id: number;
   title: string;
-  description: string;
+  started: string;
+  status: Enum;
+  difficulty: Enum;
 }
 
 export class ChallengeFull {

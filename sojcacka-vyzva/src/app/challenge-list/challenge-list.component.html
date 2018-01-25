@@ -1,0 +1,20 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Zadáno</th>
+      <th scope="col">Název</th>
+      <th scope="col">Stav</th>
+      <th scope="col">Obtížnost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let challenge of challenges">
+      <th scope="row">{{challenge.started | date }}</th>
+      <td>
+        <app-challenge-inline [challenge]="challenge"></app-challenge-inline>
+      </td>
+      <td>{{challenge.status.name}}</td>
+      <td>{{challenge.difficulty.name}}</td>
+    </tr>
+  </tbody>
+</table>

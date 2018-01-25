@@ -1,6 +1,4 @@
 <h2>Výzvy</h2>
-<ul>
-  <li *ngFor="let challenge of challenges">
-    <app-challenge-inline [challenge]="challenge"></app-challenge-inline>
-  </li>
-</ul>
+
+<app-challenge-list [challenges]="challenges"></app-challenge-list>
+

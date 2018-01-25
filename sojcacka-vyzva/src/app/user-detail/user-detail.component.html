@@ -4,11 +4,18 @@
   {{user.lastName}} <br/>
   {{user.scoreChallenges}} bodů
 </div>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{user.nickName}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{user.firstName}} {{user.lastName}}</h6>
+    <p class="card-text">Uživatel již získal {{user.scoreChallenges}} bodů.</p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
 
-<h3>Jeho úkoly:</h3>
-<ul>
-  <li *ngFor="let challenge of challenges">
-    <app-challenge-inline [challenge]= "challenge"></app-challenge-inline>  
-  </li>
-</ul>
-<button (click)="goBack()">Zpět</button>
+<h3 *ngIf="!challenges[0]">Žádné úkoly.</h3>
+<h3 *ngIf="challenges[0]">Jeho úkoly:</h3>
+<app-challenge-list *ngIf="challenges[0]" [challenges]="challenges"></app-challenge-list>
+
+<button class="btn btn-outline-secondary" (click)="goBack()">Zpět</button>
