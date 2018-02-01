@@ -21,7 +21,7 @@ export class DataService {
     // return of(CHALLENGES);
     return this.http.get<Challenge[]>(this.challengesUrl)
                     .pipe(
-                      tap(challenges => this.log('Challenges fetched.')),
+                      tap(challenges => this.log('Challenges fetched.', 'success')),
                       catchError(this.handleError('getHeroes', []))
                     );
   }
@@ -59,15 +59,15 @@ export class DataService {
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
+      this.log(`${operation} failed: ${error.message}`, 'danger');
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
 
-  private log(message: string) {
-    this.messageService.add('ble ble ble: ' + message);
+  private log(messageText: string, messageType: string) {
+    this.messageService.add(messageText, messageType);
   }
 
 }

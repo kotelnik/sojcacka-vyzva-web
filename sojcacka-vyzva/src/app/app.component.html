@@ -1,18 +1,18 @@
-<app-messages></app-messages>
 <app-navbar></app-navbar>
 <div class="container">
-  <div class="starter-template row">
-    <!--<h1>Výzva</h1>
-    <nav>
-    	<a routerLink="/users">Uživatelé</a>
-    	<a routerLink="/challenges">Všechny výzvy</a>
-    </nav>-->
-    <div class="col-sm-9">
-      <router-outlet></router-outlet>
-    </div>
-    <div class="col-sm-3">
-      <app-current-user></app-current-user>
-    </div>
-    <h5>pata</h5>
-  </div>
+	<div class="starter-template row">
+		<app-messages class="col-12"></app-messages>
+		<div class="col-md-3">
+
+			<app-current-user></app-current-user>
+		</div>
+		<div class="col-md-9">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+	<footer class="bg-secondary rounded">
+	<div class="container text-right">
+		<span class="text-white">SS Copiright by Kotelník &amp; Krolík</span>
+	</div>
+</footer>
 </div>
