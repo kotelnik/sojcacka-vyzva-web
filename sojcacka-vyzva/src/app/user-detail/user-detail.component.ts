@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -13,7 +13,7 @@ import { Challenge } from '../challenge';
 })
 export class UserDetailComponent implements OnInit {
 
-  user: UserFull;
+  @Input() user: UserFull;
   challenges: Challenge[];
 
   constructor(

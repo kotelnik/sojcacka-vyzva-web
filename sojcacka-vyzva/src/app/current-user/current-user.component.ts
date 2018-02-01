@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { DataService } from '../data.service';
 import { UserFull } from '../user';
@@ -11,7 +11,7 @@ import { UserFull } from '../user';
 
 export class CurrentUserComponent implements OnInit {
 
-  currentUser: UserFull;
+  @Input() currentUser: UserFull;
 
   constructor(public dataService: DataService) { }
 

@@ -8,12 +8,16 @@ import { MessageService } from './message.service';
 import { User, UserFull } from './user';
 import { Challenge, ChallengeFull } from './challenge';
 
-import { USERS, CHALLENGES, CHALLENGES_FULL, CURRENT_USER, USERS_FULL } from './mock-data';
+import { CHALLENGES, CHALLENGES_FULL } from './mock-data';
 
 @Injectable()
 export class DataService {
 
   private challengesUrl = 'api/challenges';
+  private challengesFullUrl = 'api/challenges_full';
+  private usersUrl = 'api/users';
+  private usersFullUrl = 'api/users_full';
+  private currentUserUrl = 'api/users_full/6';
 
   constructor(private messageService: MessageService, private http: HttpClient ) { }
 
@@ -27,19 +31,41 @@ export class DataService {
   }
 
   getUsers(): Observable<User[]> {
-    return of(USERS);
+    // return of(USERS);
+    return this.http.get<User[]>(this.usersUrl)
+                    .pipe(
+                      tap(users => this.log('Users fetched.', 'success')),
+                      catchError(this.handleError('getUsers', []))
+                    );
   }
 
   getCurrentUser(): Observable<UserFull> {
-    return of(CURRENT_USER);
+    // return of(CURRENT_USER);
+    return this.http.get<UserFull>(this.currentUserUrl)
+                    .pipe(
+                      tap(user => this.log('Current user fetched.', 'success')),
+                      catchError(this.handleError<UserFull>('getCurrentUser'))
+                    );
   }
 
   getChallenge(id: number): Observable<ChallengeFull> {
-    return of(CHALLENGES_FULL.find(challenge => challenge.id === id));
+    // return of(CHALLENGES_FULL.find(challenge => challenge.id === id));
+    const url = `${this.challengesFullUrl}/${id}`;
+    return this.http.get<ChallengeFull>(url)
+                    .pipe(
+                      tap(challenge => this.log(`Challenge id=${id} fetched.`, 'success')),
+                      catchError(this.handleError<ChallengeFull>(`getChallenge id=${id}`))
+                    );
   }
 
   getUser(id: number): Observable<UserFull> {
-    return of(USERS_FULL.find(user => user.id === id));
+    // return of(USERS_FULL.find(user => user.id === id));
+    const url = `${this.usersFullUrl}/${id}`;
+    return this.http.get<UserFull>(url)
+                    .pipe(
+                      tap(usr => this.log(`User id=${id} fetched.`, 'success')),
+                      catchError(this.handleError<UserFull>(`getUser id=${id}`))
+                    );
   }
 
   getUserChallenges(id: number): Observable<Challenge[]> {

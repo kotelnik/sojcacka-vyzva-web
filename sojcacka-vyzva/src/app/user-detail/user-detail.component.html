@@ -1,3 +1,4 @@
+<div *ngIf="user">
 <h2>{{user.nickName}}</h2>
 <div>
   {{user.firstName}} <br/>
@@ -19,3 +20,4 @@
 <app-challenge-list *ngIf="challenges[0]" [challenges]="challenges"></app-challenge-list>
 
 <button class="btn btn-outline-secondary" (click)="goBack()">Zpět</button>
+</div>
