@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -12,7 +12,7 @@ import { ChallengeFull } from '../challenge';
 })
 export class ChallengeDetailComponent implements OnInit {
 
-  challenge: ChallengeFull;
+  @Input() challenge: ChallengeFull;
 
   constructor(
     private dataService: DataService,
