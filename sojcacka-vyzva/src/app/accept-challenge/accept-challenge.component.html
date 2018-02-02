@@ -1,0 +1,14 @@
+<h2>Ukaž, jak moc jsi drsnej!</h2>
+<form (ngSubmit)="onSubmit()" #acceptChallengeForm="ngForm">
+	<div class="form-group row">
+		<label for="difficulty" class="col-sm-2 col-form-label">Zvol si obtížnost:</label>
+		<div class="col-sm-10">
+			<select class="form-control" id="difficulty" [(ngModel)]="difficulty" name="difficulty" required>
+				<option *ngFor="let challengeDifficulty of challengeDifficulties" [value]="challengeDifficulty.id">{{challengeDifficulty.name}}</option>
+			</select>
+		</div>
+	</div>
+	<button type="submit" class="btn btn-success"
+		[disabled]="!acceptChallengeForm.form.valid">Jdu do toho!</button>
+</form>
+

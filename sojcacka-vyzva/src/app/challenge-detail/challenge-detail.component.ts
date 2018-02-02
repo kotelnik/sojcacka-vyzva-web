@@ -1,8 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 
-import { DataService } from '../data.service';
 import { ChallengeFull } from '../challenge';
 
 @Component({
@@ -14,24 +11,9 @@ export class ChallengeDetailComponent implements OnInit {
 
   @Input() challenge: ChallengeFull;
 
-  constructor(
-    private dataService: DataService,
-    private location: Location,
-    private route: ActivatedRoute
-  ) { }
+  constructor() { }
 
   ngOnInit() {
-    this.getChallenge();
-  }
-
-  getChallenge(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.dataService.getChallenge(id)
-      .subscribe(challenge => this.challenge = challenge);
-  }
-
-  goBack(): void {
-    this.location.back();
   }
 
 }

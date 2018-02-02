@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { DataService } from '../data.service';
 import { ChallengeFull } from '../challenge';
+import { UserFull } from '../user';
+import { Enum } from '../enum';
 
 @Component({
   selector: 'app-my-challenge',
@@ -11,17 +14,19 @@ import { ChallengeFull } from '../challenge';
 export class MyChallengeComponent implements OnInit {
 
   challenge: ChallengeFull;
-  difficulty: number;
+  hasChallenge: boolean;
+  currentUser: UserFull;
+  difficulties: Enum[];
 
-  constructor( private dataService: DataService ) { }
+  constructor( public dataService: DataService ) { }
 
   ngOnInit() {
-    this.getMyChallenge();
+    this.getMyChallenge();  // TODO - request only if current user has challenge (and after it is loaded)
   }
 
   getMyChallenge(): void {
-    const id = 3;
-    this.dataService.getChallenge(id)
+    this.dataService.getCurrentChallenge()
       .subscribe(challenge => this.challenge = challenge);
   }
+
 }

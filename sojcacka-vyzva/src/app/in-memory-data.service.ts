@@ -313,6 +313,13 @@ export class InMemoryDataService implements InMemoryDataService {
       }
     ];
 
-    return {challenges, challenges_full, users, users_full};
+    const difficulties = [
+      {id: 1, name: 'easy'},
+      {id: 2, name: 'moderate'},
+      {id: 3, name: 'hard'},
+      {id: 4, name: 'die_hard'},
+    ];
+
+    return { challenges, challenges_full, users, users_full, difficulties };
   }
 }

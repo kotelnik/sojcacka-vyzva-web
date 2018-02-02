@@ -7,6 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from './message.service';
 import { User, UserFull } from './user';
 import { Challenge, ChallengeFull } from './challenge';
+import { Enum } from './enum';
 
 import { CHALLENGES, CHALLENGES_FULL } from './mock-data';
 
@@ -17,7 +18,12 @@ export class DataService {
   private challengesFullUrl = 'api/challenges_full';
   private usersUrl = 'api/users';
   private usersFullUrl = 'api/users_full';
-  private currentUserUrl = 'api/users_full/6';
+  private currentUserUrl = 'api/users_full/4';
+  private currentChallengeUrl = 'api/challenges_full/3';
+  private difficultiesUrl = 'api/difficulties';
+  private acceptChallengeUrl = 'api/challenges_full/5';
+
+  currentUser: UserFull;
 
   constructor(private messageService: MessageService, private http: HttpClient ) { }
 
@@ -43,8 +49,20 @@ export class DataService {
     // return of(CURRENT_USER);
     return this.http.get<UserFull>(this.currentUserUrl)
                     .pipe(
-                      tap(user => this.log('Current user fetched.', 'success')),
+                      tap(user => {
+                        this.log('Current user fetched.', 'success');
+                        this.currentUser = user;
+                        }
+                      ),
                       catchError(this.handleError<UserFull>('getCurrentUser'))
+                    );
+  }
+
+  getCurrentChallenge(): Observable<ChallengeFull> {
+    return this.http.get<ChallengeFull>(this.currentChallengeUrl)
+                    .pipe(
+                      tap(challenge => this.log('Current challenge fetched.', 'success')),
+                      catchError(this.handleError<ChallengeFull>('Current challenge failed.'))
                     );
   }
 
@@ -76,6 +94,22 @@ export class DataService {
       }
     );
     return of(CHALLENGES.filter(challenge => indices.includes(challenge.id)));
+  }
+
+  getDifficulties(): Observable<Enum[]> {
+    return this.http.get<Enum[]>(this.difficultiesUrl)
+                    .pipe(
+                      tap(difficulties => this.log('Difficulties fetched.', 'success')),
+                      catchError(this.handleError('getDifficulties', []))
+                    );
+  }
+
+  acceptChallenge(difficultyId: number): Observable<ChallengeFull> {
+    return this.http.get<ChallengeFull>(this.acceptChallengeUrl)
+                    .pipe(
+                      tap(challenge => this.log('Challenge accepted.', 'success')),
+                      catchError(this.handleError<ChallengeFull>('acceptChallenge'))
+                    );
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

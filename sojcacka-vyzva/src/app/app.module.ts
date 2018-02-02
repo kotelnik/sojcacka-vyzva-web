@@ -22,6 +22,8 @@ import { ChallengeInlineComponent } from './challenge-inline/challenge-inline.co
 import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { ChallengeListComponent } from './challenge-list/challenge-list.component';
 import { MyChallengeComponent } from './my-challenge/my-challenge.component';
+import { ChallengeByIdComponent } from './challenge-by-id/challenge-by-id.component';
+import { AcceptChallengeComponent } from './accept-challenge/accept-challenge.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { MyChallengeComponent } from './my-challenge/my-challenge.component';
     AppNavbarComponent,
     ChallengeListComponent,
     MyChallengeComponent,
+    ChallengeByIdComponent,
+    AcceptChallengeComponent,
   ],
   imports: [
     BrowserModule,

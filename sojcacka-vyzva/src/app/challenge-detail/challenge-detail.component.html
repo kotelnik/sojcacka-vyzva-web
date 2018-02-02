@@ -1,7 +1,6 @@
 <div *ngIf="challenge">
-<h2>{{challenge.title}}</h2>
-<div>Vytvořil: <app-user-inline [user]="challenge.creator"></app-user-inline> {{challenge.created | date:"d.M. y H:mm"}}</div>
-<div *ngIf="challenge.executer">Plní: <app-user-inline [user]="challenge.executer"></app-user-inline></div>
-<p>{{challenge.description}}</p>
-<button class="btn btn-outline-secondary" (click)="goBack()">Zpět</button>
+  <h2>{{challenge.title}}</h2>
+  <div>Vytvořil: <app-user-inline [user]="challenge.creator"></app-user-inline> {{challenge.created | date:"d.M. y H:mm"}}</div>
+  <div *ngIf="challenge.executer">Plní: <app-user-inline [user]="challenge.executer"></app-user-inline></div>
+  <p>{{challenge.description}}</p>
 </div>
