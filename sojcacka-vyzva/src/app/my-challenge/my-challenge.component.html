@@ -1,5 +1,5 @@
 <div *ngIf="challenge">
-	<h1>Tohle je moje výzva:</h1>
+	<h1>Moje výzva</h1>
 	<app-challenge-detail [challenge]="challenge"></app-challenge-detail>
 	<h2>Potvrdit splnění</h2>
 	<form (ngSubmit)="onSubmit()" #finishedChallengeForm="ngForm">

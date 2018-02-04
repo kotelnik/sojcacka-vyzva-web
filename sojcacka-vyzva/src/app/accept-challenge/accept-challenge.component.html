@@ -1,4 +1,4 @@
-<h1>Zrovna nemáš žádnou výzvu.</h1>
+<h1>Zrovna nemáš žádnou výzvu. <i class="fa fa-frown-o"></i></h1>
 <h2>Ukaž, jak moc jsi drsnej!</h2>
 <form (ngSubmit)="onSubmit()" #acceptChallengeForm="ngForm">
 	<div class="form-group row">
@@ -12,6 +12,6 @@
 		</div>
 	</div>
 	<button type="submit" class="btn btn-success"
-		[disabled]="!acceptChallengeForm.form.valid">Jdu do toho!</button>
+		[disabled]="!acceptChallengeForm.form.valid"><i class="fa fa-thumbs-up"></i> Jdu do toho!</button>
 </form>
 
