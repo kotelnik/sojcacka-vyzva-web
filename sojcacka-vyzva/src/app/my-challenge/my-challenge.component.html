@@ -1,10 +1,19 @@
-<div *ngIf="dataService.currentUser">
-<div *ngIf="dataService.currentUser.hasChallenge;else accept_challenge">
-  <h1>Máš výzvu!</h1>
+<div *ngIf="challenge">
+	<h1>Tohle je moje výzva:</h1>
 	<app-challenge-detail [challenge]="challenge"></app-challenge-detail>
-</div>
-<ng-template #accept_challenge>
-  <h1>Zrovna nemáš žádnou výzvu.</h1>
-  <app-accept-challenge></app-accept-challenge>
-</ng-template>
+	<h2>Potvrdit splnění</h2>
+	<form (ngSubmit)="onSubmit()" #finishedChallengeForm="ngForm">
+		<div class="form-group row">
+			<label for="difficulty" class="col-sm-2 col-form-label">Splnil jsi?</label>
+			<div class="col-sm-10">
+				<select class="form-control" id="finished" [(ngModel)]="finished"
+					name="finished" required>
+					<option value="false">Bohuže ne. Jsem totiž srágora.</option>
+					<option value="true" selected>Jasně, jsem machr.</option>
+				</select>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-success"
+			[disabled]="!finishedChallengeForm.form.valid">Odeslat</button>
+	</form>
 </div>

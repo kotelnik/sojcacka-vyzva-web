@@ -1,0 +1,49 @@
+<h2>Přidání výzvy</h2>
+<form (ngSubmit)="onSubmit()" #newChallengeForm="ngForm" novalidate>
+	<div class="form-group row">
+		<label for="title" class="col-sm-2 col-form-label"> Název </label>
+		<div class="col-sm-10">
+			<input class="form-control" id="title" [(ngModel)]="newChallenge.title"
+				name="title" required minlength=3 maxlength=50 #title="ngModel">
+			<div *ngIf="title.invalid && (title.dirty || title.touched)"
+				class="alert alert-danger">
+				<div *ngIf="title.errors.required">Název je nutný</div>
+				<div *ngIf="title.errors.minlength">Název musí být alespoň
+					{{title.errors.minlength.requiredLength}} znaků.</div>
+				<div *ngIf="title.errors.maxlength">Název musí být maximálně
+					{{title.errors.maxlength.requiredLength}} znaků.</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="difficulty" class="col-sm-2 col-form-label"> Obtížnost </label>
+		<div class="col-sm-10">
+			<select class="form-control" id="difficulty" [(ngModel)]="newChallenge.difficulty"
+				name="difficulty" required #difficulty="ngModel">
+				<option *ngFor="let challengeDifficulty of challengeDifficulties"
+					[value]="challengeDifficulty.id">{{challengeDifficulty.name}}</option>
+			</select>
+			<div *ngIf="difficulty.invalid && (difficulty.dirty || difficulty.touched)"
+				class="alert alert-danger">
+				<div *ngIf="difficulty.errors.required">Obtížnost je nutná</div>
+			</div>
+		</div>
+	</div>
+		<div class="form-group row">
+		<label for="description" class="col-sm-2 col-form-label"> Popis </label>
+		<div class="col-sm-10">
+			<textarea class="form-control" id="description" [(ngModel)]="newChallenge.description"
+				name="description" required minlength="10" maxlength=500 #description="ngModel"></textarea>
+				<div *ngIf="description.invalid && (description.dirty || description.touched)"
+				class="alert alert-danger">
+				<div *ngIf="description.errors.required">Popis je nutný</div>
+				<div *ngIf="description.errors.minlength">Popis musí být alespoň
+					{{description.errors.minlength.requiredLength}} znaků.</div>
+				<div *ngIf="description.errors.maxlength">Popis musí být maximálně
+					{{description.errors.maxlength.requiredLength}} znaků.</div>
+			</div>
+		</div>
+	</div>
+	<button type="submit" class="btn btn-success"
+		[disabled]="!newChallengeForm.form.valid">Přidat výzvu</button>
+</form>

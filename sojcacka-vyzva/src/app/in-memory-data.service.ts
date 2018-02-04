@@ -320,6 +320,14 @@ export class InMemoryDataService implements InMemoryDataService {
       {id: 4, name: 'die_hard'},
     ];
 
-    return { challenges, challenges_full, users, users_full, difficulties };
+    const finishChallenge = [
+      {id: 1, finished: false},
+      {id: 2, finished: false},
+      {id: 3, finished: false},
+      {id: 4, finished: false},
+      {id: 5, finished: false},
+    ];
+
+    return { challenges, challenges_full, users, users_full, difficulties, finishChallenge };
   }
 }

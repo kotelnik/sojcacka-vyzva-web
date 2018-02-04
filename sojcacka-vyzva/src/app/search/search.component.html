@@ -1,0 +1,10 @@
+<ng-template #rt let-r="result" let-t="term"> <img
+	[src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r['flag']"
+	width="16"> {{ r.name}} </ng-template>
+
+<form class="form-inline my-2 my-lg-0">
+	<input class="form-control mr-sm-2" type="text" placeholder="Hledej"
+		aria-label="Hledej" [ngbTypeahead]="search" [resultTemplate]="rt"
+		[inputFormatter]="formatter">
+	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Hledej</button>
+</form>

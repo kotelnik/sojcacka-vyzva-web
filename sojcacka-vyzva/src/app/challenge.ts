@@ -24,3 +24,15 @@ export class ChallengeFull {
   difficulty: Enum;
   dueTime: string;
 }
+
+export class NewChallenge {
+  title: string;
+  description: string;
+  difficulty: number;
+
+  constructor() {
+    this.title = '';
+    this.description = '';
+    this.difficulty = null;
+  }
+}

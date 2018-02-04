@@ -9,7 +9,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let challenge of challenges">
-      <th scope="row">{{challenge.started | date }}</th>
+      <th scope="row">{{challenge.started ? (challenge.started | date) : '-'}}</th>
       <td>
         <app-challenge-inline [challenge]="challenge"></app-challenge-inline>
       </td>

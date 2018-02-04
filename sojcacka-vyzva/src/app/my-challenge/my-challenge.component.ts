@@ -3,8 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { DataService } from '../data.service';
 import { ChallengeFull } from '../challenge';
-import { UserFull } from '../user';
-import { Enum } from '../enum';
+import { ChallengeStatus } from '../challenge-status';
 
 @Component({
   selector: 'app-my-challenge',
@@ -14,14 +13,18 @@ import { Enum } from '../enum';
 export class MyChallengeComponent implements OnInit {
 
   challenge: ChallengeFull;
-  hasChallenge: boolean;
-  currentUser: UserFull;
-  difficulties: Enum[];
+  finished: boolean;
 
-  constructor( public dataService: DataService ) { }
+  constructor(private dataService: DataService ) { }
+
+  onSubmit() {
+    const challengeStatus: ChallengeStatus = { id: this.challenge.id, finished: this.finished };
+    this.dataService.finishChallenge(challengeStatus)
+      .subscribe();
+  }
 
   ngOnInit() {
-    this.getMyChallenge();  // TODO - request only if current user has challenge (and after it is loaded)
+    this.getMyChallenge();
   }
 
   getMyChallenge(): void {

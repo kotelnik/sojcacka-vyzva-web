@@ -1,0 +1,7 @@
+<div *ngIf="dataService.currentUser">
+	<div *ngIf="dataService.currentUser.hasChallenge;else accept_challenge">
+		<app-my-challenge></app-my-challenge>
+	</div>
+	<ng-template #accept_challenge> <app-accept-challenge></app-accept-challenge>
+	</ng-template>
+</div>

@@ -24,6 +24,9 @@ import { ChallengeListComponent } from './challenge-list/challenge-list.componen
 import { MyChallengeComponent } from './my-challenge/my-challenge.component';
 import { ChallengeByIdComponent } from './challenge-by-id/challenge-by-id.component';
 import { AcceptChallengeComponent } from './accept-challenge/accept-challenge.component';
+import { NewChallengeComponent } from './new-challenge/new-challenge.component';
+import { MyChallengeSwitchComponent } from './my-challenge-switch/my-challenge-switch.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,9 @@ import { AcceptChallengeComponent } from './accept-challenge/accept-challenge.co
     MyChallengeComponent,
     ChallengeByIdComponent,
     AcceptChallengeComponent,
+    NewChallengeComponent,
+    MyChallengeSwitchComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,10 +6,15 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { MessageService } from './message.service';
 import { User, UserFull } from './user';
-import { Challenge, ChallengeFull } from './challenge';
+import { Challenge, ChallengeFull, NewChallenge } from './challenge';
 import { Enum } from './enum';
+import { ChallengeStatus } from './challenge-status';
 
-import { CHALLENGES, CHALLENGES_FULL } from './mock-data';
+import { CHALLENGES, CHALLENGES_FULL, STATES_WITH_FLAGS } from './mock-data';
+
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 
 @Injectable()
 export class DataService {
@@ -19,9 +24,10 @@ export class DataService {
   private usersUrl = 'api/users';
   private usersFullUrl = 'api/users_full';
   private currentUserUrl = 'api/users_full/4';
-  private currentChallengeUrl = 'api/challenges_full/3';
+  private currentChallengeUrl = 'api/challenges_full/2';
   private difficultiesUrl = 'api/difficulties';
   private acceptChallengeUrl = 'api/challenges_full/5';
+  private finishChallengeUrl = 'api/finishChallenge';
 
   currentUser: UserFull;
 
@@ -110,6 +116,32 @@ export class DataService {
                       tap(challenge => this.log('Challenge accepted.', 'success')),
                       catchError(this.handleError<ChallengeFull>('acceptChallenge'))
                     );
+  }
+
+  finishChallenge(challengeStatus: ChallengeStatus): Observable<any> {
+    return this.http.put(this.finishChallengeUrl, challengeStatus, httpOptions)
+                    .pipe(
+                      tap(_ => {
+                        this.log('Challenge finished.', 'success');
+                        this.getCurrentUser();
+                      }),
+                      catchError(this.handleError<any>('finishChallenge'))
+                    );
+  }
+
+  createChallenge(challenge: NewChallenge): Observable<ChallengeFull> {
+    return this.http.post<ChallengeFull>(this.challengesUrl, challenge, httpOptions)
+                    .pipe(
+                      tap( createdChallenge => {
+                        this.log('Challenge created.', 'success');
+                      }),
+                      catchError(this.handleError<ChallengeFull>('createChallenge'))
+                    );
+  }
+
+  search(term: string): Observable<any[]> {
+    return of(STATES_WITH_FLAGS.filter(state => state.name.toUpperCase().indexOf(term.toUpperCase()) >= 0));
+    // return this.http.get<any>(this.usersUrl, {params: PARAMS.set('search', term)});
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

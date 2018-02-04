@@ -5,7 +5,8 @@ import { UsersComponent } from './users/users.component';
 import { ChallengesComponent } from './challenges/challenges.component';
 import { ChallengeByIdComponent } from './challenge-by-id/challenge-by-id.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import { MyChallengeComponent } from './my-challenge/my-challenge.component';
+import { MyChallengeSwitchComponent } from './my-challenge-switch/my-challenge-switch.component';
+import { NewChallengeComponent } from './new-challenge/new-challenge.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/users', pathMatch: 'full' },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'challenges', component: ChallengesComponent },
   { path: 'challenge/:id', component: ChallengeByIdComponent },
   { path: 'user/:id', component: UserDetailComponent },
-  { path: 'myChallenge', component: MyChallengeComponent }
+  { path: 'newChallenge', component: NewChallengeComponent },
+  { path: 'myChallenge', component: MyChallengeSwitchComponent }
 ];
 
 @NgModule({
