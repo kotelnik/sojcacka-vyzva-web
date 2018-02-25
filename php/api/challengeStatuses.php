@@ -1,5 +1,7 @@
 <?php
 
+ApiHelper::allowOnlyGET();
+
 // connect to database
 $connection = Connection::connectForRead();
 
@@ -13,7 +15,6 @@ while ($row = mysqli_fetch_array($challenge_query)) {
     array_push($result, $item);
 }
 
-header('Content-Type: application/json; charset=UTF-8');
-echo json_encode($result);
+ApiHelper::printJsonResult($result);
 
 ?>

@@ -1,10 +1,6 @@
 <?php
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(400);
-    echo 'The only supported method is POST.';
-    exit();
-}
+ApiHelper::allowOnlyPOST();
 
 $requestBody = file_get_contents("php://input");
 error_log('requestBody: '.$requestBody);
@@ -17,26 +13,24 @@ if (!$jsonRequest) {
 // connect to database
 $connection = Connection::connectForReadWrite();
 
-$sql = 'SELECT COUNT(*) FROM Challenge WHERE executerId IS NULL';
+$sql_difficulty = '';
 if (isset($jsonRequest['difficultyId'])) {
     $difficultyId = $jsonRequest['difficultyId'];
-    $sql = $sql.' AND difficultyId='.$difficultyId;
+    $sql_difficulty = ' AND difficultyId='.$difficultyId;
 }
+
+$sql = 'SELECT COUNT(*) FROM Challenge WHERE executerId IS NULL'.$sql_difficulty;
+
 error_log($sql);
 
 $query = mysqli_query($connection, $sql);
 $count = (int) mysqli_fetch_array($query)[0];
 if ($count === 0) {
-    http_response_code(404);
-    echo 'No free challenge found.';
-    exit();
+    ApiHelper::exitWithError(ErrorBean::$NO_FREE_CHALLENGE);
 }
+error_log('count is '.$count);
 
-$sql = 'SELECT * FROM Challenge WHERE executerId IS NULL';
-if (isset($jsonRequest['difficultyId'])) {
-    $difficultyId = $jsonRequest['difficultyId'];
-    $sql = $sql.' AND difficultyId='.$difficultyId;
-}
+$sql = 'SELECT * FROM Challenge WHERE executerId IS NULL'.$sql_difficulty;
 error_log($sql);
 $query = mysqli_query($connection, $sql);
 
@@ -45,24 +39,23 @@ while ($row = mysqli_fetch_array($query)) {
     array_push($existingChallenges, $row);
 }
 
-$index = rand(0, $count);
+$index = rand(0, $count-1);
 
-$chosenChallenge = $existingChallenges[$index];
-$chosenChallengeId = $chosenChallenge['id'];
+$chosenChallengeId = $existingChallenges[$index]['id'];
 
-$sql = 'UPDATE Challenge SET executerId='.$PERSON_ID.', started=now() WHERE id='.$chosenChallengeId;
+$sql = 'UPDATE Challenge SET executerId='.$PERSON_ID.',started=now(),statusId=2 WHERE id='.$chosenChallengeId;
 
 $query = mysqli_query($connection, $sql);
 
 if (!$query) {
-    http_response_code(400);
-    echo 'Unable to update chosen challenge.';
-    exit();
+    ApiHelper::exitWithError(ErrorBean::$CANNOT_UPDATE_CHALLENGE);
 }
 
 // success
-$result = ApiHelper::copyChallenge($chosenChallenge, $connection);
-header('Content-Type: application/json; charset=UTF-8');
-echo json_encode($result);
+$sql = 'SELECT * FROM Challenge WHERE id='.$chosenChallengeId;
+$query = mysqli_query($connection, $sql);
+$row = mysqli_fetch_array($query);
+$result = ApiHelper::copyChallenge($row, $connection);
+ApiHelper::printJsonResult($result);
 
 ?>

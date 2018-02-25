@@ -1,20 +1,19 @@
 <?php
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(400);
-    echo 'The only supported method is POST.';
-    exit();
-}
+ApiHelper::allowOnlyPOST();
 
 $requestBody = file_get_contents("php://input");
 error_log('requestBody: '.$requestBody);
 $jsonRequest = json_decode($requestBody, true);
 
 if (!$jsonRequest) {
-    http_response_code(400);
-    echo 'Request JSON is not valid.';
-    exit();
+    $jsonRequest = array();
 }
+
+if (!isset($jsonRequest['id']) || !is_numeric($jsonRequest['id'])) {
+    ApiHelper::exitWithError(ErrorBean::$WRONG_PARAMETER);
+}
+$idParam = $jsonRequest['id'];
 
 // connect to database
 $connection = Connection::connectForReadWrite();
@@ -43,29 +42,26 @@ function addToQuery($jsonRequest, $connection, $paramName, $previous_sql, $allow
 
 //$sql = 'UPDATE Challenge SET ';
 $sql = '';
-$sql = $sql . addToQuery($jsonRequest, $connection, 'statusId', $sql, false);
 $sql = $sql . addToQuery($jsonRequest, $connection, 'title', $sql, false);
 $sql = $sql . addToQuery($jsonRequest, $connection, 'description', $sql, false);
 $sql = $sql . addToQuery($jsonRequest, $connection, 'score', $sql, false);
 $sql = $sql . addToQuery($jsonRequest, $connection, 'durationSec', $sql, false);
 $sql = $sql . addToQuery($jsonRequest, $connection, 'difficultyId', $sql, false);
-$sql = $sql . addToQuery($jsonRequest, $connection, 'executerId', $sql, false);
-$sql = $sql . addToQuery($jsonRequest, $connection, 'created', $sql, true);
-$sql = $sql . addToQuery($jsonRequest, $connection, 'started', $sql, true);
-$sql = $sql . addToQuery($jsonRequest, $connection, 'finished', $sql, true);
-$sql = 'UPDATE Challenge SET ' . $sql . ' WHERE id = ' . mysqli_real_escape_string($connection, $jsonRequest['id']);
+$sql = 'UPDATE Challenge SET ' . $sql . ' WHERE id = ' . mysqli_real_escape_string($connection, $idParam);
 
 error_log('sql: ' . $sql);
 
 $query = mysqli_query($connection, $sql);
 
-if ($query) {
-    // success
-    http_response_code(200);
-    echo 'OK';
-} else {
-    http_response_code(400);
-    echo 'error';
+if (!$query) {
+    ApiHelper::exitWithError(ErrorBean::$CANNOT_UPDATE_CHALLENGE);
 }
+
+// success
+$sql = 'SELECT * FROM Challenge WHERE id='.$idParam;
+$query = mysqli_query($connection, $sql);
+$row = mysqli_fetch_array($query);
+$result = ApiHelper::copyChallenge($row, $connection);
+ApiHelper::printJsonResult($result);
 
 ?>

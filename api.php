@@ -8,11 +8,11 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS"); //TODO DELETE!!
 header("Access-Control-Allow-Headers: Origin, Content-Type"); //TODO DELETE!!
 
 // Handling the Preflight
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') { 
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit;
 }
 
-$KNOWN_API_PATHS = ['/currentUser', '/user/list', '/search', '/createChallenge', '/updateChallenge', '/acceptChallenge', '/acceptedChallenges', '/createdChallenges', '/challengeDifficulties', '/challengeStatuses'];
+$KNOWN_API_PATHS = ['/challenge','/userChallenges', '/user', '/difficulties', '/finishStatuses', '/currentUser', '/currentChallenge', '/finishChallenge', '/search', '/createChallenge', '/updateChallenge', '/acceptChallenge', '/acceptedChallenges', '/createdChallenges', '/challengeStatuses'];
 
 if (!isset($_GET['path'])) {
     http_response_code(400);

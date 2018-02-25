@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS Challenge;
 DROP TABLE IF EXISTS Person;
 DROP TABLE IF EXISTS ChallengeStatus;
+DROP TABLE IF EXISTS ChallengeFinishStatus;
 DROP TABLE IF EXISTS ChallengeDifficulty;
 
 CREATE TABLE Person (
@@ -24,6 +25,7 @@ CREATE TABLE Challenge (
     started DATETIME,
     finished DATETIME,
     statusId INT NOT NULL,
+    finishStatusId INT NULL,
     score DOUBLE NOT NULL,
     durationSec BIGINT NOT NULL,
     difficultyId INT NOT NULL,
@@ -31,6 +33,12 @@ CREATE TABLE Challenge (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE ChallengeStatus (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50),
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE ChallengeFinishStatus (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(50),
     PRIMARY KEY (id)
@@ -45,4 +53,5 @@ CREATE TABLE ChallengeDifficulty (
 ALTER TABLE Challenge ADD CONSTRAINT FOREIGN KEY (creatorId) REFERENCES Person (id);
 ALTER TABLE Challenge ADD CONSTRAINT FOREIGN KEY (executerId) REFERENCES Person (id);
 ALTER TABLE Challenge ADD CONSTRAINT FOREIGN KEY (statusId) REFERENCES ChallengeStatus (id);
+ALTER TABLE Challenge ADD CONSTRAINT FOREIGN KEY (finishStatusId) REFERENCES ChallengeFinishStatus (id);
 ALTER TABLE Challenge ADD CONSTRAINT FOREIGN KEY (difficultyId) REFERENCES ChallengeDifficulty (id);
