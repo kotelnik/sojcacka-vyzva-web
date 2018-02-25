@@ -1,10 +1,14 @@
-<ng-template #rt let-r="result" let-t="term"> <img
-	[src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r['flag']"
-	width="16"> {{ r.name}} </ng-template>
+<ng-template #rt let-r="result" let-t="term">
+  <a class="text-dark" routerLink="/r.type/r.id"><i *ngIf="r.type=='user'" class="fa fa-user-secret"></i> <i *ngIf="r.type=='challenge'" class="fa fa-thumb-tack"></i> {{ r.title}}</a>
+</ng-template>
 
 <form class="form-inline my-2 my-lg-0">
-	<input class="form-control mr-sm-2" type="text" placeholder="Hledej"
-		aria-label="Hledej" [ngbTypeahead]="search" [resultTemplate]="rt"
-		[inputFormatter]="formatter">
-	<button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i> Hledej</button>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <div class="input-group-text"><i class="fa fa-search"></i></div>
+    </div>
+    <input class="form-control mr-sm-2" type="text" placeholder="Hledej"
+      aria-label="Hledej" [ngbTypeahead]="search" [resultTemplate]="rt"
+      [inputFormatter]="formatter">
+  </div>
 </form>

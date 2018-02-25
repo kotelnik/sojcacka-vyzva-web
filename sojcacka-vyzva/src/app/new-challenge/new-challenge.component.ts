@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
+import { Router } from  '@angular/router';
 
 import { NewChallenge, ChallengeFull } from '../challenge';
 import { DataService } from '../data.service';
@@ -15,7 +15,7 @@ export class NewChallengeComponent implements OnInit {
   challengeDifficulties: Enum[];
   newChallenge: NewChallenge = new NewChallenge();
 
-  constructor( private dataService: DataService, private location: Location ) { }
+  constructor( private dataService: DataService, private router: Router ) { }
 
   ngOnInit() {
     this.getDifficulties();
@@ -28,7 +28,8 @@ export class NewChallengeComponent implements OnInit {
 
   onSubmit() {
     this.dataService.createChallenge(this.newChallenge)
-      .subscribe( challenge => this.location.go('/challenge/' + challenge.id));
+      .subscribe( challenge => this.router.navigate(['/challenges']));
+      //.subscribe( challenge => this.router.navigate(['/challenge/' + challenge.id]));
   }
 
 }

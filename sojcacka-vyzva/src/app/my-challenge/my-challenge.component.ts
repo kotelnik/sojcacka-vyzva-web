@@ -13,14 +13,16 @@ import { ChallengeStatus } from '../challenge-status';
 export class MyChallengeComponent implements OnInit {
 
   challenge: ChallengeFull;
-  finished: boolean;
+  finishStatusId: number;
 
   constructor(private dataService: DataService ) { }
 
   onSubmit() {
-    const challengeStatus: ChallengeStatus = { id: this.challenge.id, finished: this.finished };
+    const challengeStatus: ChallengeStatus = { id: this.challenge.id, finishStatusId: this.finishStatusId };
     this.dataService.finishChallenge(challengeStatus)
-      .subscribe();
+      .subscribe(_ => this.dataService.getCurrentUser().subscribe()
+
+      );
   }
 
   ngOnInit() {

@@ -16,16 +16,16 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="difficulty" class="col-sm-2 col-form-label"> Obtížnost </label>
+		<label for="difficultyId" class="col-sm-2 col-form-label"> Obtížnost </label>
 		<div class="col-sm-10">
-			<select class="form-control" id="difficulty" [(ngModel)]="newChallenge.difficulty"
-				name="difficulty" required #difficulty="ngModel">
+			<select class="form-control" id="difficultyId" [(ngModel)]="newChallenge.difficultyId"
+				name="difficultyId" required #difficultyId="ngModel">
 				<option *ngFor="let challengeDifficulty of challengeDifficulties"
 					[value]="challengeDifficulty.id">{{challengeDifficulty.name}}</option>
 			</select>
-			<div *ngIf="difficulty.invalid && (difficulty.dirty || difficulty.touched)"
+			<div *ngIf="difficultyId.invalid && (difficultyId.dirty || difficultyId.touched)"
 				class="alert alert-danger">
-				<div *ngIf="difficulty.errors.required">Obtížnost je nutná</div>
+				<div *ngIf="difficultyId.errors.required">Obtížnost je nutná</div>
 			</div>
 		</div>
 	</div>

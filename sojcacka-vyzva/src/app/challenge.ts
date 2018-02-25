@@ -28,11 +28,11 @@ export class ChallengeFull {
 export class NewChallenge {
   title: string;
   description: string;
-  difficulty: number;
+  difficultyId: number;
 
   constructor() {
     this.title = '';
     this.description = '';
-    this.difficulty = null;
+    this.difficultyId = null;
   }
 }

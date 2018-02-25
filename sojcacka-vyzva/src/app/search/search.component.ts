@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from  '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import {of} from 'rxjs/observable/of';
+import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/do';
@@ -20,7 +21,7 @@ export class SearchComponent implements OnInit {
   searchFailed = false;
   hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
 
-  constructor( private dataService: DataService ) { }
+  constructor( private dataService: DataService, private router: Router ) { }
 
   ngOnInit() {
   }
@@ -30,7 +31,7 @@ export class SearchComponent implements OnInit {
       .debounceTime(300)
       .distinctUntilChanged()
       .do(() => this.searching = true)
-      .switchMap(term =>
+      .switchMap(term => term.length < 3 ? [] :
         this.dataService.search(term)
           .do(() => this.searchFailed = false)
           .catch(() => {
@@ -40,6 +41,10 @@ export class SearchComponent implements OnInit {
       .do(() => this.searching = false)
       .merge(this.hideSearchingWhenUnsubscribed)
 
-  formatter = (x: {name: string}) => x.name;
+  formatter = (x: any) => {
+      this.router.navigate(['/' + x.type, x.id ]);
+      console.log(x);
+      return "";
+    };
 
 }

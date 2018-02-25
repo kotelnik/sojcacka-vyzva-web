@@ -3,3 +3,8 @@ export class Message {
   type: string;
   text: string;
 }
+
+export class MessageType {
+  type: string;
+  timeout: number;
+}

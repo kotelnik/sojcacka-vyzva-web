@@ -14,7 +14,7 @@ import { Challenge } from '../challenge';
 export class UserDetailComponent implements OnInit {
 
   @Input() user: UserFull;
-  challenges: Challenge[];
+  challenges: Challenge[] = [];
 
   constructor(
     private dataService: DataService,

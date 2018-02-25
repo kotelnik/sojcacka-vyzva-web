@@ -9,7 +9,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { AppComponent } from './app.component';
 import { CurrentUserComponent } from './current-user/current-user.component';
 import { UsersComponent } from './users/users.component';
-import { InMemoryDataService } from './in-memory-data.service';
+//import { InMemoryDataService } from './in-memory-data.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { ChallengesComponent } from './challenges/challenges.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -57,7 +57,7 @@ import { SearchComponent } from './search/search.component';
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot( InMemoryDataService, {dataEncapsulation: false})
+    //HttpClientInMemoryWebApiModule.forRoot( InMemoryDataService, {dataEncapsulation: false})
   ],
   providers: [DataService, MessageService],
   bootstrap: [AppComponent]
