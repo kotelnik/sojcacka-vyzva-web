@@ -42,6 +42,7 @@ $sql = 'SELECT score FROM Challenge WHERE id='.$idParam;
 $query = mysqli_query($connection, $sql);
 $score = (int) mysqli_fetch_array($query)[0];
 
+//TODO jen když je passed
 $sql = 'UPDATE Person SET scoreChallenges=(scoreChallenges+'.$score.') WHERE id='.$PERSON_ID;
 $query = mysqli_query($connection, $sql);
 if (!$query) {

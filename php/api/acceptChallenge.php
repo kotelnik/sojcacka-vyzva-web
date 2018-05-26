@@ -19,6 +19,8 @@ if (isset($jsonRequest['difficultyId'])) {
     $sql_difficulty = ' AND difficultyId='.$difficultyId;
 }
 
+//TODO proč se nebere difficulty?
+
 $sql = 'SELECT COUNT(*) FROM Challenge WHERE executerId IS NULL'.$sql_difficulty;
 
 error_log($sql);
